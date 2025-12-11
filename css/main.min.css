@@ -19623,9 +19623,9 @@ header .navigation-bar {
 }
 
 header .navigation-bar nav {
-    -ms-flex: 0 0 75%;
-    flex: 0 0 75%;
-    max-width: 75%
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%
 }
 
 header .navigation-bar nav ul li {
