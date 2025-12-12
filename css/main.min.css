@@ -19514,11 +19514,11 @@ p {
 
 .btn-default:hover {
     color: #fff;
-    background-color: #f37335
+    background-color: #63f101
 }
 
 .btn-default:hover i {
-    color: #f37335
+    color: #63f101
 }
 
 .btn-default i {
@@ -19603,7 +19603,7 @@ header .header-content .contact-add li .contact-info>i {
     vertical-align: top;
     position: relative;
     top: 6px;
-    color: #f37335;
+    color: #63f101;
 }
 
 header .header-content .contact-add li .contact-info .contact-tt {
@@ -19754,7 +19754,7 @@ header .navigation-bar nav ul ul ul {
 }
 
 .main-section .main-title {
-    color: #f37335;
+    color: #63f101;
     font-size: 182px;
     font-weight: 600;
     position: absolute;
@@ -19779,7 +19779,7 @@ header .navigation-bar nav ul ul ul {
 
 .main-banner .banner-text>h2 span {
     display: inline-block;
-    color: #f37335;
+    color: #63f101;
     position: relative
 }
 
@@ -19796,7 +19796,7 @@ header .navigation-bar nav ul ul ul {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #f37335;
+    background-color: #63f101;
     opacity: 1;
     visibility: visible;
     transition: all .4s ease-in-out
@@ -19863,7 +19863,7 @@ header .navigation-bar nav ul ul ul {
 }
 
 .main-banner .banner-text .search-form button:hover {
-    color: #f37335
+    color: #63f101
 }
 
 .section-title {
@@ -19879,7 +19879,7 @@ header .navigation-bar nav ul ul ul {
 }
 
 .section-title>h2>span {
-    color: #f37335
+    color: #63f101
 }
 
 .section-title p {
@@ -20005,7 +20005,7 @@ header .navigation-bar nav ul ul ul {
     height: 42px;
     line-height: 42px;
     border-radius: 100px;
-    background: linear-gradient(180deg, #fdc830, #f37335);
+    background: linear-gradient(180deg, #01ffff, #63f101);
     text-align: center
 }
 
@@ -20090,7 +20090,7 @@ header .navigation-bar nav ul ul ul {
     bottom: -20px;
     right: 20px;
     width: 40px;
-    background: linear-gradient(180deg, #fdc830, #f37335);
+    background: linear-gradient(180deg, #01ffff, #63f101);
     z-index: 99;
     text-align: center;
     border-radius: 30px;
@@ -20388,7 +20388,7 @@ header .navigation-bar nav ul ul ul {
 }
 
 .newsletter-section .newsletter-sec {
-    background: linear-gradient(90deg, #fdc830, #f37335);
+    background: linear-gradient(90deg, #01ffff, #63f101);
     background-repeat: no-repeat;
     padding: 57px 100px 55px;
     border-radius: 40px;
@@ -20448,7 +20448,7 @@ header .navigation-bar nav ul ul ul {
 .newsletter-section .newsletter-sec .newsletter-form .form-group input,
 .newsletter-section .newsletter-sec .newsletter-form .form-group select {
     width: 100%;
-    background-color: #fddead;
+    background-color: #ffffff;
     height: 40px;
     line-height: 40px;
     color: #575757;
@@ -20469,7 +20469,7 @@ header .navigation-bar nav ul ul ul {
 .newsletter-section .newsletter-sec .newsletter-form .form-group textarea {
     color: #575757;
     font-size: 14.23px;
-    background-color: #fddead;
+    background-color: #ffffff;
     height: 70px;
     width: 100%;
     border-radius: 20px;
@@ -20694,7 +20694,7 @@ footer .bottom-footer .social-links {
 }
 
 .pager-section .page-titlee {
-    color: #f37335;
+    color: #63f101;
     font-size: 162.6px;
     font-weight: 600;
     opacity: .1;
@@ -20731,7 +20731,7 @@ footer .bottom-footer .social-links {
 
 .about-page-content .act-inffo>span {
     text-transform: uppercase;
-    color: #f37335;
+    color: #63f101;
     font-size: 14.23px;
     font-weight: 500;
     font-family: Poppins, sans-serif;
@@ -20827,7 +20827,7 @@ footer .bottom-footer .social-links {
 
 .classes-page .classes-banner>span {
     display: inline-block;
-    color: #f37335;
+    color: #63f101;
     font-size: 14.23px;
     font-weight: 500;
     text-transform: uppercase;
@@ -20887,7 +20887,7 @@ footer .bottom-footer .social-links {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #f37335;
+    background-color: #63f101;
     opacity: 0;
     visibility: hidden;
     transition: all .4s ease-in-out
@@ -20981,8 +20981,8 @@ footer .bottom-footer .social-links {
 }
 
 .schedule-page .nav-tabs li a.active {
-    border-color: #f37335 !important;
-    color: #f37335
+    border-color: #63f101 !important;
+    color: #63f101
 }
 
 .schedule-page .schedule-content {
@@ -21037,7 +21037,7 @@ footer .bottom-footer .social-links {
 
 .schedule-page .schedule-content .schp-list li .mkd-info {
     padding: 41px 20px 35px;
-    background: linear-gradient(180deg, #fdc830, #f37335);
+    background: linear-gradient(180deg, #01ffff, #63f101);
     text-align: center;
     height: 100%
 }
@@ -21256,7 +21256,7 @@ footer .bottom-footer .social-links {
 
 .blog-post.single blockquote>span {
     display: block;
-    color: #f37335;
+    color: #63f101;
     font-size: 12.19px;
     font-style: italic;
     position: relative;
@@ -21396,7 +21396,7 @@ footer .bottom-footer .social-links {
 }
 
 .sidebar .widget-categories ul li a:hover {
-    color: #f37335
+    color: #63f101
 }
 
 .sidebar .widget-categories ul li span {
@@ -21429,7 +21429,7 @@ footer .bottom-footer .social-links {
 }
 
 .sidebar .widget-posts .wd-posts .wd-post .wd-info>h3:hover {
-    color: #f37335
+    color: #63f101
 }
 
 .sidebar .widget-posts .wd-posts .wd-post .wd-info>span {
@@ -21473,7 +21473,7 @@ footer .bottom-footer .social-links {
 }
 
 .sidebar .widget-comments ul li:hover {
-    color: #f37335
+    color: #63f101
 }
 
 .sidebar .widget-comments ul li:hover a {
@@ -21516,7 +21516,7 @@ footer .bottom-footer .social-links {
 }
 
 .sidebar .widget-archives ul li a:hover {
-    color: #f37335
+    color: #63f101
 }
 
 .sidebar .widget-tags ul {
@@ -21569,7 +21569,7 @@ footer .bottom-footer .social-links {
 }
 
 .sidebar .widget-calendar .mdp-calendar table tbody td.active {
-    background: linear-gradient(270deg, #fdc830, #f37335);
+    background: linear-gradient(270deg, #01ffff, #63f101);
     color: #fff;
     border-radius: 50%
 }
@@ -21650,7 +21650,7 @@ footer .bottom-footer .social-links {
     left: 0;
     width: 16px;
     height: 16px;
-    background: linear-gradient(270deg, #fdc830, #f37335);
+    background: linear-gradient(270deg, #01ffff, #63f101);
     transform: translateY(-50%);
     border-radius: 50%
 }
@@ -21767,7 +21767,7 @@ footer .bottom-footer .social-links {
 
 .blog-section.posts-page .blog-posts .blog-post.quote-post .blog-info>span {
     display: block;
-    color: #f37335;
+    color: #63f101;
     font-size: 12.19px;
     font-style: italic;
     position: relative;
@@ -22036,7 +22036,7 @@ footer .bottom-footer .social-links {
 
 .failed,
 .text-info {
-    background: #f37335;
+    background: #63f101;
     padding: 10px;
     margin-bottom: 20px;
     color: #fff !important
@@ -22070,7 +22070,7 @@ footer .bottom-footer .social-links {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #f37335;
+    color: #63f101;
     font-size: 300px;
     font-weight: 600;
     opacity: .05;
@@ -22086,7 +22086,7 @@ footer .bottom-footer .social-links {
 }
 
 .error-page .error-text h2 {
-    color: #f37335;
+    color: #63f101;
     font-size: 150px;
     font-weight: 700;
     margin-bottom: 20px;
@@ -22110,7 +22110,7 @@ footer .bottom-footer .social-links {
 }
 
 .error-page .error-text .social-icons li a:hover {
-    background: linear-gradient(180deg, #fdc830, #f37335)
+    background: linear-gradient(180deg, #01ffff, #63f101)
 }
 
 .social-icons li {
@@ -22173,7 +22173,7 @@ footer .bottom-footer .social-links {
 }
 
 .teacher-col .teacher--info .social-icons li a {
-    background: linear-gradient(180deg, #fdc830, #f37335)
+    background: linear-gradient(180deg, #01ffff, #63f101)
 }
 
 .search-content .blog-section {
@@ -22421,7 +22421,7 @@ footer .bottom-footer .social-links {
     width: 50px;
     height: 50px;
     line-height: 50px;
-    background: linear-gradient(270deg, #fdc830, #f37335);
+    background: linear-gradient(270deg, #01ffff, #63f101);
     border-radius: 50%;
     text-align: center
 }
@@ -22567,7 +22567,7 @@ footer .bottom-footer .social-links {
 .sg-event>span {
     display: inline-block;
     color: #fff;
-    background: linear-gradient(180deg, #fdc830, #f37335)
+    background: linear-gradient(180deg, #01ffff, #63f101)
 }
 
 .sg-event>span {
@@ -22667,7 +22667,7 @@ footer .bottom-footer .social-links {
     top: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(180deg, #fdc830, #f37335);
+    background: linear-gradient(180deg, #01ffff, #63f101);
     height: 100%;
     z-index: -1;
     border-radius: 50%;
@@ -22675,7 +22675,7 @@ footer .bottom-footer .social-links {
 }
 
 .teacher-single-page .teacher-coly .social-icons li a:hover:before {
-    background: linear-gradient(0deg, #fdc830, #f37335)
+    background: linear-gradient(0deg, #01ffff, #63f101)
 }
 
 .teacher-single-page .teacher-content {
@@ -22684,7 +22684,7 @@ footer .bottom-footer .social-links {
 }
 
 .teacher-single-page .teacher-content>h3 {
-    color: #f37335;
+    color: #63f101;
     font-size: 20px;
     font-style: italic;
     margin-bottom: 21px
@@ -22846,7 +22846,7 @@ footer .bottom-footer .social-links {
 }
 
 .teacher-single-page .teacher-content .skills-tech .progess-row .progress .progress-bar.bg-clr3 {
-    background-color: #fdc830
+    background-color: #01ffff
 }
 
 .teacher-single-page .teacher-content .skills-tech .progess-row .progress .progress-bar.bg-clr4 {
@@ -22870,7 +22870,7 @@ footer .bottom-footer .social-links {
 }
 
 .schedule-mobile-content .ttb-list>ul li .dd-info {
-    background: linear-gradient(180deg, #fdc830, #f37335);
+    background: linear-gradient(180deg, #01ffff, #63f101);
     padding: 35px 20px
 }
 
