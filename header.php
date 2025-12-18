@@ -82,11 +82,7 @@
                                 </li>
                                 <li>
                                     <a href="contact.html" title="Contact">Contact</a>
-                                    <ul>
-                                        <li>
-                                            <a href="career.html" title="Career">Career</a>
-                                        </li>
-                                    </ul>
+                                    
                                 </li>
                             </ul>
                         </nav><!--nav end-->

@@ -24194,7 +24194,7 @@ footer .bottom-footer .social-links {
 
 /* DEFAULT — MOBILE FIRST (2 per row) */
 .insta-item {
-  width: 50%;
+  width: 48%;
   position: relative;
   overflow: hidden;
 }
@@ -24202,7 +24202,7 @@ footer .bottom-footer .social-links {
 /* MOBILE: reduce height (less tall squares) */
 .insta-item .insta-slide {
   width: 100%;
-  height: 160px;
+  /* height: 160px; */
   /* reduced height */
   object-fit: cover;
   display: block;
@@ -24212,12 +24212,10 @@ footer .bottom-footer .social-links {
 /* TABLET — 3 per row */
 @media (min-width: 768px) {
   .insta-item {
-    width: 33.333%;
+    width: 32.333%;
   }
 
-  .insta-item .insta-slide {
-    height: 220px;
-  }
+  
 }
 
 /* DESKTOP — 5 per row */
