@@ -4,7 +4,7 @@
         <div class="pager-content text-center">
             <h2>Contact Us </h2>
             <ul>
-                <li><a href="#" title>Home</a></li>
+                <li><a href="index.php" title>Home</a></li>
                 <li><span>Contact Us</span></li>
             </ul>
         </div><!--pager-content end-->
@@ -25,24 +25,33 @@
                         <form id="contact-form" method="post" action="#">
                             <div class="response"></div>
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group"><input type="text" name="name" class="name"
-                                            placeholder="Name" required></div><!--form-group end-->
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="fl-field">
+                                        <input type="text" name="Name" id="Name" placeholder=" " required />
+                                        <label for="Name"> Name</label>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group"><input type="email" name="email" class="email"
-                                            placeholder="Email" required></div><!--form-group end-->
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group"><input type="tel" name="phone" class="phone"
-                                            placeholder="Phone" required></div><!--form-group end-->
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group"><textarea name="message" placeholder="Message"></textarea>
-                                    </div><!--form-group end-->
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="fl-field">
+                                        <input type="email" name="email" id="email" placeholder=" " required />
+                                        <label for="email">Email</label>
+                                    </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="form-submit"><button type="button" id="submit" class="btn-default">Send
+                                    <div class="fl-field">
+                                        <input type="tel" name="phone" id="phone" placeholder=" " required />
+                                        <label for="phone">Phone</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="fl-field">
+                                        <textarea name="Message" id="Message"></textarea>
+                                        <label for="Message">Message</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="form-submit"><button type="submit" id="submit" class="btn-default">Send
                                             Now <i class="fa fa-long-arrow-alt-right"></i></button></div>
                                     <!--form-submit end-->
                                 </div>
@@ -56,7 +65,8 @@
                         <ul>
                             <li>
                                 <div class="d-flex flex-wrap">
-                                    <div class="icon-v"><img src="assets/img/icon15.png" alt></div>
+                                    <div class="icon-v"> <i class="fa-solid fa-phone-volume"></i>
+                                    </div>
                                     <div class="dd-cont">
                                         <h4>Call</h4><span><a href="tel:+923032660229">+92
                                                 303
@@ -66,7 +76,15 @@
                             </li>
                             <li>
                                 <div class="d-flex flex-wrap">
-                                    <div class="icon-v"><img src="assets/img/icon16.png" alt></div>
+                                    <div class="icon-v"><i class="fa-regular fa-envelope"></i></div>
+                                    <div class="dd-cont">
+                                        <h4>Email</h4><span><a href="mailto:info@edim.com.pk">info@edim.com.pk</a></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex flex-wrap">
+                                    <div class="icon-v"><i class="fa-regular fa-clock"></i></div>
                                     <div class="dd-cont">
                                         <h4>Work
                                             Time</h4><span>8:00am
@@ -76,8 +94,8 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="d-flex flex-wrap">
-                                    <div class="icon-v"><img src="assets/img/icon17.png" alt></div>
+                                <div class="d-flex flexwrap">
+                                    <div class="icon-v"><i class="fa-solid fa-location-dot"></i></div>
                                     <div class="dd-cont">
                                         <h4>Address</h4><span>KESC
                                             # 187, L Block Road,
@@ -100,63 +118,17 @@
     <div class="container">
         <div class="newsletter-sec">
             <div class="row align-items-center">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="newsz-ltr-text">
-                        <h2>Request<br />Admission </h2>
-                        <a href="admission.html" title="View admission details" class="btn-default">
-                            View Admissions <i class="fa fa-long-arrow-alt-right"></i>
-                        </a>
+                        <h2>Build Your Career<br />With Us</h2>
                     </div>
                     <!--newsz-ltr-text end-->
                 </div>
 
-                <div class="col-lg-8">
-                    <form class="newsletter-form">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" name="name" placeholder="Parent / Guardian Name" />
-                                </div>
-                                <!--form-group end-->
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="email" name="email" placeholder="Email Address" />
-                                </div>
-                                <!--form-group end-->
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group select-tg">
-                                    <select name="class">
-                                        <option selected disabled>Class
-                                            Applying
-                                            For</option>
-                                        <option>Montessori /
-                                            Early Years</option>
-                                        <option>Primary (Grade I
-                                            – V)</option>
-                                        <option>Secondary (Grade
-                                            VI – X)</option>
-                                        <option>Transfer /
-                                            Migration</option>
-                                        <option>Not Sure
-                                            Yet</option>
-                                    </select>
-                                </div>
-                                <!--form-group end-->
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea name="message"
-                                        placeholder="Share your query (admission, fee, campus visit, etc.)"></textarea>
-                                </div>
-                                <!--form-group end-->
-                            </div>
-                        </div>
-                    </form>
+                <div class="col-lg-6">
+                    <a href="career.php" title="Career Opportunities" class="btn-default">
+                        Career Opportunities <i class="fa fa-long-arrow-alt-right"></i>
+                    </a>
                     <!--newsletter-form end-->
                 </div>
             </div>

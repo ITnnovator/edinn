@@ -20081,6 +20081,7 @@ a.crt-btn i {
   border: 1px solid #d6d6d6;
   border-top: 0;
   border-radius: 0 0 10px 10px;
+      height: 235px;
 }
 
 .classes-section .classes-col .class-info > h3 {
@@ -20272,8 +20273,9 @@ a.crt-btn i {
   left: -1px;
   width: 7px;
   height: 166px;
-  background-image: url(../webImages/shape3.png);
-  background-repeat: no-repeat;
+  /* background-image: url(../webImages/shape3.png);
+  background-repeat: no-repeat; */
+  background: linear-gradient(90deg, #01ffff, #63f101);
 }
 
 .course-section .courses-list .course-card .course-meta li {
@@ -20460,7 +20462,7 @@ a.crt-btn i {
 .newsletter-section .newsletter-sec {
   background: linear-gradient(90deg, #01ffff, #63f101);
   background-repeat: no-repeat;
-  padding: 57px 100px 55px;
+  padding: 40px 100px 40px;
   border-radius: 40px;
   background-position: 0;
   margin-bottom: -135px;
@@ -20494,7 +20496,7 @@ a.crt-btn i {
   color: #2b2b2b;
   font-size: 36.58px;
   line-height: 44.71px;
-  margin-bottom: 33px;
+  /* margin-bottom: 33px; */
   font-weight: 700;
 }
 
@@ -24318,6 +24320,63 @@ footer .bottom-footer .col-lg-6 {
 
 .copy-itnovator img {
     padding: 0 10px;
-    max-width: 200px;
+    max-width: 160px;
     object-fit: contain;
+}
+
+
+.html5-prev-inside .mh-icon-left, .html5-next-inside .mh-icon-right{
+ background-color: #63f101  !important; 
+ color: black !important;
+}
+
+.mh-icon-left:before {
+    content: '\f104';
+}
+.mh-icon-right:before {
+    content: '\f105';
+}
+[class^="mh-icon-"]:before, [class*=" mh-icon-"]:before {
+    font-family: "fontawesome";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+    /* font-size: 120%; */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+footer .top-footer .contact-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+footer .top-footer .contact-info i {
+    color: #63f101;
+    font-size: 20px;
+}
+.comment-area .fl-field {
+    margin-bottom: 18px;
+}
+.mdp-our-contacts .icon-v i{
+    color: #63f101;
+    font-size: 16px;
+}
+
+
+@media  (max-width: 577px) {
+  .mdp-our-contacts .flexwrap {
+    flex-wrap: wrap;
+}
 }

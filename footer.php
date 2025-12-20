@@ -21,17 +21,27 @@
                 <ul class="contact-add">
                   <li>
                     <div class="contact-info">
-                      <img src="webImages/icon1.png" alt />
+                      <i class="fa-solid fa-phone-volume"></i>
                       <div class="contact-tt">
                         <h4>Call / WhatsApp</h4>
-                        <span>+92 303 2660229</span>
+                        <span> <a href="tel:+923032660229">+92 303 2660229</a></span>
+                      </div>
+                    </div>
+                    <!--contact-info end-->
+                  </li>
+                    <li>
+                    <div class="contact-info">
+                     <i class="fa-regular fa-envelope"></i>
+                      <div class="contact-tt">
+                        <h4>Email</h4>
+                        <span> <a href="mailto:info@edinn.com.pk">info@edinn.com.pk</a></span>
                       </div>
                     </div>
                     <!--contact-info end-->
                   </li>
                   <li>
                     <div class="contact-info">
-                      <img src="webImages/icon2.png" alt />
+                     <i class="fa-regular fa-clock"></i>
                       <div class="contact-tt">
                         <h4>School Timings</h4>
                         <span>Mon – Fri · 8:00 AM – 2:00 PM</span>
@@ -41,10 +51,10 @@
                   </li>
                   <li>
                     <div class="contact-info">
-                      <img src="webImages/icon3.png" alt />
+                    <i class="fa-solid fa-location-dot"></i>
                       <div class="contact-tt">
                         <h4>Address</h4>
-                        <span>KESC # 187, L Block Rd, Islam Nagar, Orangi
+                        <span> <a href="https://maps.app.goo.gl/VAhtzep2GzF4TZ4J7" target="_blank" >KESC # 187, L Block Rd, Islam Nagar, Orangi
                           Town, Karachi</span>
                       </div>
                     </div>
@@ -59,18 +69,18 @@
               <div class="widget widget-links">
                 <h3 class="widget-title">Quick Links</h3>
                 <ul>
-                  <li><a href="about.html" title="About Engineers &amp; Doctors School">About
+                  <li><a href="about.php" title="About Engineers &amp; Doctors School">About
                       Us</a></li>
-                  <li><a href="Academics.html" title="Academic programs">Academics</a></li>
-                  <li><a href="location.html" title="Facilities and student life">Facilities &amp;
+                  <li><a href="Academics.php" title="Academic programs">Academics</a></li>
+                  <li><a href="location.php" title="Facilities and student life">Facilities &amp;
                       Student Life</a></li>
-                  <li><a href="events.html" title="Events and activities">Events &amp;
+                  <li><a href="events.php" title="Events and activities">Events &amp;
                       Activities</a></li>
-                  <li><a href="blog.html" title="News and updates">News &amp;
+                  <li><a href="blog.php" title="News and updates">News &amp;
                       Updates</a></li>
-                  <li><a href="admission.html" title="Admission information">Admissions</a></li>
+                  <li><a href="admission.php" title="Admission information">Admissions</a></li>
                   <li>
-                    <a href="career.html" title="Career">Career</a>
+                    <a href="career.php" title="Career">Career</a>
                   </li>
                 </ul>
               </div>

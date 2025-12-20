@@ -5,7 +5,7 @@
         <div class="pager-content text-center">
             <h2>Career Form</h2>
             <ul>
-                <li><a href="#" title>Home</a></li>
+                <li><a href="index.php" title>Home</a></li>
                 <li><span>Career Form</span></li>
             </ul>
         </div><!--pager-content end-->
@@ -114,63 +114,17 @@
     <div class="container">
         <div class="newsletter-sec">
             <div class="row align-items-center">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="newsz-ltr-text">
-                        <h2>Request<br />Admission </h2>
-                        <a href="admission.html" title="View admission details" class="btn-default">
-                            View Admissions <i class="fa fa-long-arrow-alt-right"></i>
-                        </a>
+                        <h2>Build Your Career<br />With Us</h2>
                     </div>
                     <!--newsz-ltr-text end-->
                 </div>
 
-                <div class="col-lg-8">
-                    <form class="newsletter-form">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" name="name" placeholder="Parent / Guardian Name" />
-                                </div>
-                                <!--form-group end-->
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="email" name="email" placeholder="Email Address" />
-                                </div>
-                                <!--form-group end-->
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group select-tg">
-                                    <select name="class">
-                                        <option selected disabled>Class
-                                            Applying
-                                            For</option>
-                                        <option>Montessori /
-                                            Early Years</option>
-                                        <option>Primary (Grade I
-                                            – V)</option>
-                                        <option>Secondary (Grade
-                                            VI – X)</option>
-                                        <option>Transfer /
-                                            Migration</option>
-                                        <option>Not Sure
-                                            Yet</option>
-                                    </select>
-                                </div>
-                                <!--form-group end-->
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea name="message"
-                                        placeholder="Share your query (admission, fee, campus visit, etc.)"></textarea>
-                                </div>
-                                <!--form-group end-->
-                            </div>
-                        </div>
-                    </form>
+                <div class="col-lg-6">
+                    <a href="career.php" title="Career Opportunities" class="btn-default">
+                        Career Opportunities <i class="fa fa-long-arrow-alt-right"></i>
+                    </a>
                     <!--newsletter-form end-->
                 </div>
             </div>

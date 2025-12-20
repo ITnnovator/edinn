@@ -100,3 +100,8 @@ jQuery(function ($) {
             : loadHtml5LightBox(e);
 })();
 
+jQuery(".menu-btn").on("click", function () {
+    jQuery(this).toggleClass("active"),
+        jQuery(".responsive-menu").toggleClass("active"),
+        jQuery("body").toggleClass("scroll-hide");
+})

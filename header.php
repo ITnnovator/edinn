@@ -19,6 +19,7 @@
     integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="icon" href="webImages/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="css/main.min.css" />
   <link rel="stylesheet" type="text/css" href="css/button.min.css" />
 </head>
@@ -30,7 +31,7 @@
       <div class="container">
         <div class="header-content d-flex flex-wrap align-items-center">
           <div class="logo">
-            <a href="index.html" title="Engineers &amp; Doctors School - Home">
+            <a href="index.php" title="Engineers &amp; Doctors School - Home">
               <img src="webImages/logo.png" alt="Engineers &amp; Doctors School Logo">
             </a>
           </div><!--logo end-->
@@ -38,10 +39,10 @@
           <ul class="contact-add d-flex flex-wrap">
             <li>
               <div class="contact-info">
-                <i class="fa fa-phone"></i>
+                <i class="fa-solid fa-phone-volume"></i>
                 <div class="contact-tt">
                   <h4>Call / WhatsApp</h4>
-                  <span>+92 303 2660229</span>
+                  <span> <a href="tel:+923032660229">+92 303 2660229</a></span>
                 </div>
               </div><!--contact-info end-->
             </li>
@@ -50,7 +51,7 @@
                 <i class="fa fa-envelope"></i>
                 <div class="contact-tt">
                   <h4>Email</h4>
-                  <span>info@edinn.com.pk</span>
+                  <span> <a href="mailto:info@edinn.com.pk">info@edinn.com.pk</a></span>
                 </div>
               </div><!--contact-info end-->
             </li>
@@ -66,22 +67,22 @@
             <ul>
               <!-- MAIN LINKS -->
               <li>
-                <a class="active" href="index.html" title="Home">Home</a>
+                <a class="active" href="index.php" title="Home">Home</a>
               </li>
               <li>
-                <a href="about.html" title="About Engineers &amp; Doctors School">About Us</a>
+                <a href="about.php" title="About Engineers &amp; Doctors School">About Us</a>
               </li>
               <li>
-                <a href="academics.html" title="Academic Programs">Academics</a>
+                <a href="academics.php" title="Academic Programs">Academics</a>
               </li>
               <li>
-                <a href="admission.html" title="Admissions">Admissions</a>
+                <a href="admission.php" title="Admissions">Admissions</a>
               </li>
               <li>
-                <a href="gallery.html" title="Admissions">Gallery</a>
+                <a href="gallery.php" title="Admissions">Gallery</a>
               </li>
               <li>
-                <a href="contact.html" title="Contact">Contact</a>
+                <a href="contact.php" title="Contact">Contact</a>
 
               </li>
             </ul>
@@ -92,15 +93,23 @@
 
     <div class="responsive-menu">
       <ul>
-        <li><a href="index.html" title="Home">Home</a></li>
-        <li><a href="about.html" title="About Us">About Us</a></li>
-        <li><a href="Academics.html" title="Academics">Academics</a></li>
-        <li><a href="location.html" title="Facilities and Student Life">Facilities / Student
-            Life</a></li>
-        <li><a href="admission.html" title="Admissions">Admissions</a></li>
-        <li><a href="blog.html" title="News and Events">News &amp;
-            Events</a></li>
-        <li><a href="testimonial.html" title="Testimonials">Testimonials</a></li>
-        <li><a href="contact.html" title="Contact">Contact</a></li>
+        <li>
+          <a class="active" href="index.php" title="Home">Home</a>
+        </li>
+        <li>
+          <a href="about.php" title="About Engineers &amp; Doctors School">About Us</a>
+        </li>
+        <li>
+          <a href="academics.php" title="Academic Programs">Academics</a>
+        </li>
+        <li>
+          <a href="admission.php" title="Admissions">Admissions</a>
+        </li>
+        <li>
+          <a href="gallery.php" title="Admissions">Gallery</a>
+        </li>
+        <li>
+          <a href="contact.php" title="Contact">Contact</a>
+        </li>
       </ul>
     </div>
