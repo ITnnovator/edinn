@@ -1,11 +1,12 @@
 import Link from "next/link";
+import LightBoxGallery from "@/components/LightBoxGallery";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Gallery | Engineers & Doctors School Campus & Activities",
   description: "View the Engineers & Doctors School gallery—campus highlights, classrooms, events, student activities, and memorable moments from our Karachi school community.",
   alternates: {
-      canonical: "https://edschool.pk/gallery"
+    canonical: "https://edschool.pk/gallery"
   }
 };
 
@@ -35,13 +36,14 @@ export default function Gallery() {
       <section className="insta-section classes-page">
         <div className="container content-standard">
           <div className="insta-flex">
-            {images.map((imgSrc, index) => (
-              <div className="insta-item" key={index}>
-                <a href={imgSrc} data-group="set1" className="insta-slide html5lightbox">
-                  <img src={imgSrc} alt={`Gallery Image ${index + 1}`} />
-                </a>
-              </div>
-            ))}
+            <LightBoxGallery
+              className="insta-flex"
+              images={images.map((src, index) => ({
+                src,
+                alt: `Gallery Image ${index + 1}`,
+                className: "insta-item"
+              }))}
+            />
           </div>
         </div>
       </section>
@@ -52,7 +54,7 @@ export default function Gallery() {
           <div className="newsletter-sec">
             <div className="row align-items-center">
               <div className="col-lg-6">
-                 <div className="newsz-ltr-text">
+                <div className="newsz-ltr-text">
                   <h2>Build Your Career<br />With Us</h2>
                 </div>
                 {/* newsz-ltr-text end */}
@@ -60,7 +62,7 @@ export default function Gallery() {
 
               <div className="col-lg-6">
                 <Link href="/career" title="Career Opportunities" className="btn-default">
-                   Career Opportunities <i className="fa fa-long-arrow-alt-right"></i>
+                  Career Opportunities <i className="fa fa-long-arrow-alt-right"></i>
                 </Link>
                 {/* newsletter-form end */}
               </div>

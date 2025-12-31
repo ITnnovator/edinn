@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import LightBoxGallery from '@/components/LightBoxGallery';
 
 export default function Home() {
   return (
@@ -123,58 +124,18 @@ export default function Home() {
           {/* about-rw end */}
 
           <div className="abt-img">
-            <ul className="masonary">
-              <li className="width1 wow zoomIn" data-wow-duration="1000ms">
-                <a href="/webImages/gallery_edmin/gallery01.jpg" data-group="set1" title="" className="html5lightbox">
-                  <img src="/webImages/gallery_edmin/gallery01.jpg" alt="Engineers & Doctors School Gallery" />
-                </a>
-              </li>
-              <li className="width2 wow zoomIn" data-wow-duration="1000ms">
-                <a href="/webImages/gallery_edmin/gallery02.jpg" data-group="set1" title="" className="html5lightbox">
-                  <img src="/webImages/gallery_edmin/gallery02.jpg" alt="" />
-                </a>
-              </li>
-              <li className="width3 wow zoomIn" data-wow-duration="1000ms">
-                <a href="/webImages/gallery_edmin/gallery03.jpg" data-group="set1" title="" className="html5lightbox">
-                  <img src="/webImages/gallery_edmin/gallery03.jpg" alt="" />
-                </a>
-              </li>
-              <li className="width4 wow zoomIn" data-wow-duration="1000ms">
-                <a href="/webImages/gallery_edmin/gallery04.jpg" data-group="set1" title="" className="html5lightbox">
-                  <img src="/webImages/gallery_edmin/gallery04.jpg" alt="" />
-                </a>
-              </li>
-              <li className="width5 wow zoomIn" data-wow-duration="1000ms">
-                <a href="/webImages/gallery_edmin/gallery05.jpg" data-group="set1" title="" className="html5lightbox">
-                  <img src="/webImages/gallery_edmin/gallery05.jpg" alt="" />
-                </a>
-              </li>
-              <li className="width6 wow zoomIn" data-wow-duration="1000ms">
-                <a href="/webImages/gallery_edmin/gallery06.jpg" data-group="set1" title="" className="html5lightbox">
-                  <img src="/webImages/gallery_edmin/gallery06.jpg" alt="" />
-                </a>
-              </li>
-              <li className="width7 wow zoomIn" data-wow-duration="1000ms">
-                <a href="/webImages/gallery_edmin/gallery07.jpg" data-group="set1" title="" className="html5lightbox">
-                  <img src="/webImages/gallery_edmin/gallery07.jpg" alt="" />
-                </a>
-              </li>
-              <li className="width8 wow zoomIn" data-wow-duration="1000ms">
-                <a href="/webImages/gallery_edmin/gallery08.jpg" data-group="set1" title="" className="html5lightbox">
-                  <img src="/webImages/gallery_edmin/gallery08.jpg" alt="" />
-                </a>
-              </li>
-              <li className="width9 wow zoomIn" data-wow-duration="1000ms">
-                <a href="/webImages/gallery_edmin/gallery09.jpg" data-group="set1" title="" className="html5lightbox">
-                  <img src="/webImages/gallery_edmin/gallery09.jpg" alt="" />
-                </a>
-              </li>
-              <li className="width10 wow zoomIn" data-wow-duration="1000ms">
-                <a href="/webImages/gallery_edmin/gallery10.jpg" data-group="set1" title="" className="html5lightbox">
-                  <img src="/webImages/gallery_edmin/gallery10.jpg" alt="" />
-                </a>
-              </li>
-            </ul>
+            <LightBoxGallery images={[
+              { src: "/webImages/gallery_edmin/gallery01.jpg", alt: "Engineers & Doctors School Gallery", className: "width1 wow zoomIn" },
+              { src: "/webImages/gallery_edmin/gallery02.jpg", alt: "", className: "width2 wow zoomIn" },
+              { src: "/webImages/gallery_edmin/gallery03.jpg", alt: "", className: "width3 wow zoomIn" },
+              { src: "/webImages/gallery_edmin/gallery04.jpg", alt: "", className: "width4 wow zoomIn" },
+              { src: "/webImages/gallery_edmin/gallery05.jpg", alt: "", className: "width5 wow zoomIn" },
+              { src: "/webImages/gallery_edmin/gallery06.jpg", alt: "", className: "width6 wow zoomIn" },
+              { src: "/webImages/gallery_edmin/gallery07.jpg", alt: "", className: "width7 wow zoomIn" },
+              { src: "/webImages/gallery_edmin/gallery08.jpg", alt: "", className: "width8 wow zoomIn" },
+              { src: "/webImages/gallery_edmin/gallery09.jpg", alt: "", className: "width9 wow zoomIn" },
+              { src: "/webImages/gallery_edmin/gallery10.jpg", alt: "", className: "width10 wow zoomIn" },
+            ]} />
           </div>
           {/* abt-img end */}
         </div>

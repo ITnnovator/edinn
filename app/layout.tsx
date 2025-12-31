@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'Engineers & Doctors School in Karachi offers quality education with strong academics, admissions guidance, and a supportive learning environment.',
   keywords: 'Engineers & Doctors School, ED School Karachi, school in Karachi, admissions, academics, education',
   icons: {
-    icon: '/favicon.png',
+    icon: '/webImages/favicon.png',
   },
 };
 
@@ -61,13 +61,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Legacy Scripts */}
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" strategy="beforeInteractive" />
-        <Script src="/js/html5box.js" strategy="lazyOnload" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" strategy="lazyOnload" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" strategy="lazyOnload" />
-        <Script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js" strategy="lazyOnload" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" strategy="lazyOnload" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" strategy="lazyOnload" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" strategy="lazyOnload" />
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" strategy="afterInteractive" />
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" strategy="afterInteractive" />
+        <Script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js" strategy="afterInteractive" />
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" strategy="afterInteractive" />
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" strategy="afterInteractive" />
+        <Script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js" strategy="afterInteractive" />
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" strategy="afterInteractive" />
         <Script src="/js/ajax.js" strategy="lazyOnload" />
         {/* Logic from main.js is now in Header.tsx and Scripts.tsx */}
 

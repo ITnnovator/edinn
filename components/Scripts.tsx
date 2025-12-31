@@ -15,32 +15,28 @@ export default function Scripts() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // 1. Initialize WOW.js
-    if (typeof window !== "undefined" && window.WOW) {
-      new window.WOW({
-        boxClass: "wow",
-        animateClass: "animated",
-        offset: 0,
-        mobile: false,
-        live: true,
-        scrollContainer: null,
-        resetAnimation: true,
-      }).init();
-    }
+    // Helper to check conditions and run init
+    const checkAndInit = () => {
+      // 1. Initialize WOW.js
+      if (typeof window !== "undefined" && window.WOW && !document.body.classList.contains('wow-inited')) {
+        new window.WOW({
+          boxClass: "wow",
+          animateClass: "animated",
+          offset: 0,
+          mobile: false,
+          live: true,
+          scrollContainer: null,
+          resetAnimation: true,
+        }).init();
+        document.body.classList.add('wow-inited');
+      }
 
-    // 2. Initialize Slick Carousel (if appearing on the page)
-    // We wrap this in a timeout or check specifically to ensure DOM is ready or after navigation
-    if (typeof window !== "undefined" && window.jQuery) {
-      const $ = window.jQuery;
-
-      const initSlick = () => {
+      // 2. Initialize Slick Carousel
+      if (typeof window !== "undefined" && window.jQuery && window.jQuery.fn.slick) {
+        const $ = window.jQuery;
         const $c = $(".classes-carousel");
         if ($c.length > 0) {
-          // Prevent double init
-          if ($c.hasClass("slick-initialized")) {
-            $c.slick("unslick");
-          }
-          if (typeof $c.slick === "function") {
+          if (!$c.hasClass("slick-initialized")) {
             $c.slick({
               slidesToShow: 4,
               slidesToScroll: 1,
@@ -59,42 +55,24 @@ export default function Scripts() {
             });
           }
         }
-      };
+      }
+    };
 
-      // 3. Initialize Masonry / Isotope (if appearing on the page)
-      const initIsotope = () => {
-        const $n = $(".masonary");
-        if ($n.length > 0 && $.fn.isotope) {
-          $n.isotope({ masonry: { columnWidth: 0.5 } });
+    // Run check immediately
+    checkAndInit();
 
-          $(".option-set").find("a").off("click").on("click", function (this: HTMLElement) {
-            const t = $(this);
-            if (t.hasClass("selected")) return false;
-            const e = t.parents(".option-set");
-            e.find(".selected").removeClass("selected");
-            t.addClass("selected");
+    // Poll for scripts for a few seconds
+    const intervalId = setInterval(checkAndInit, 200);
 
-            const i: any = {};
-            const attrKey = e.attr("data-option-key");
-            let attrValue: any = t.attr("data-option-value");
+    // Stop polling after 3 seconds to avoid infinite work
+    const timeoutId = setTimeout(() => {
+      clearInterval(intervalId);
+    }, 3000);
 
-            if (attrValue === "false") attrValue = false;
-
-            if (attrKey) {
-              i[attrKey] = attrValue;
-              $n.isotope(i);
-            }
-            return false;
-          });
-        }
-      };
-
-      // Delay initialization slightly to let React render
-      setTimeout(() => {
-        initSlick();
-        initIsotope();
-      }, 100);
-    }
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+    };
 
   }, [pathname]); // Re-run on route change
 
