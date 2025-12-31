@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import Scripts from '@/components/Scripts';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Scripts from '../components/Scripts';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -40,7 +40,7 @@ export default function RootLayout({
         {/* Alertify & Legacy CSS */}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
-        
+
         {/* Local CSS from public/css */}
         <link rel="stylesheet" type="text/css" href="/css/main.min.css" />
         <link rel="stylesheet" type="text/css" href="/css/button.min.css" />
@@ -48,7 +48,7 @@ export default function RootLayout({
       <body>
         <div className="wrapper">
           <Header />
-            {children}
+          {children}
           <Footer />
         </div>
 
@@ -70,9 +70,9 @@ export default function RootLayout({
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" strategy="lazyOnload" />
         <Script src="/js/ajax.js" strategy="lazyOnload" />
         {/* Logic from main.js is now in Header.tsx and Scripts.tsx */}
-        
+
         <Scripts />
-        
+
         {/* Global Tag */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-MX158PHENN" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
