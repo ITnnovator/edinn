@@ -42,53 +42,82 @@ export default function AdminDashboard() {
       <style jsx>{`
         .dashboard-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-          gap: 20px;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 24px;
         }
 
         .stat-card {
           background: #fff;
-          padding: 20px;
-          border-radius: 20px;
+          padding: 24px;
+          border-radius: 24px;
           display: flex;
           align-items: center;
-          gap: 15px;
-          box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.12);
+          gap: 20px;
+          box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.02);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .stat-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0px 20px 40px rgba(112, 144, 176, 0.12);
         }
 
         .icon-box {
-          width: 56px;
-          height: 56px;
+          width: 64px;
+          height: 64px;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 24px;
+          font-size: 28px;
+          transition: all 0.3s ease;
         }
 
-        .icon-purple { background: #F4F7FE; color: #4318FF; }
-        .icon-blue { background: #F4F7FE; color: #3965FF; }
-        .icon-green { background: #F4F7FE; color: #01B574; }
+        .stat-card:hover .icon-box {
+          transform: scale(1.1);
+        }
+
+        .icon-purple { background: #f5f5f5; color: #000000; }
+        .icon-blue { background: #f5f5f5; color: #000000; }
+        .icon-green { background: #f5f5f5; color: #000000; }
 
         .stat-info span {
           color: #A3AED0;
           font-size: 14px;
+          font-weight: 500;
+          margin-bottom: 5px;
+          display: block;
         }
 
         .stat-info h3 {
           margin: 0;
           color: #2B3674;
-          font-size: 24px;
+          font-size: 32px;
           font-weight: 700;
+          letter-spacing: -0.5px;
         }
 
         .recent-activity {
           grid-column: 1 / -1;
           background: white;
-          padding: 20px;
-          border-radius: 20px;
-          margin-top: 20px;
-          box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.12);
+          padding: 32px;
+          border-radius: 24px;
+          margin-top: 10px;
+          box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.02);
+          border: 1px solid rgba(0,0,0,0.02);
+        }
+        
+        .recent-activity h3 {
+          margin-top: 0;
+          margin-bottom: 20px;
+          color: #2B3674;
+          font-size: 20px;
+          font-weight: 700;
+        }
+
+        .recent-activity p {
+          color: #A3AED0;
         }
       `}</style>
     </div>

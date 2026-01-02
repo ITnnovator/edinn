@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Gallery() {
-  // Array of 54 images as seen in the legacy file (gallery01.jpg to gallery54.jpg)
-  const images = Array.from({ length: 54 }, (_, i) => {
-    const num = String(i + 1).padStart(2, '0');
-    return `/webImages/gallery_edmin/gallery${num}.jpg`;
-  });
+// Server Component
+import { getGalleryImages } from "@/app/actions/gallery";
+
+export default async function Gallery() {
+  const { data: dbImages } = await getGalleryImages("main");
+  const images = dbImages || [];
 
   return (
     <>
@@ -36,15 +36,21 @@ export default function Gallery() {
       <section className="insta-section classes-page">
         <div className="container content-standard">
           <div className="insta-flex">
-            <LightBoxGallery
-              className="insta-flex"
-              layout="insta"
-              images={images.map((src, index) => ({
-                src,
-                alt: `Gallery Image ${index + 1}`,
-                className: "insta-item"
-              }))}
-            />
+            {images.length > 0 ? (
+                <LightBoxGallery
+                className="insta-flex"
+                layout="insta"
+                images={images.map((img, index) => ({
+                    src: img.url,
+                    alt: img.title || `Gallery Image ${index + 1}`,
+                    className: "insta-item"
+                }))}
+                />
+            ) : (
+                <div className="text-center py-5">
+                    <p>No images found in the gallery.</p>
+                </div>
+            )}
           </div>
         </div>
       </section>

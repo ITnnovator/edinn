@@ -11,16 +11,16 @@ export async function TeacherList() {
   return (
     <>
       {teachers.map((teacher: any) => (
-        <div key={teacher.id} className="col-lg-3 col-md-3 col-sm-6 col-6 full-wdth">
+        <div key={teacher.id} className="col-lg-3 col-md-3 col-sm-6 col-6 full-wdth mb-4">
           <div className="teacher">
             <div className="teacher-img">
               <Image 
                 src={teacher.image || '/webImages/tech1.jpg'} 
                 alt={teacher.name} 
                 width={300} 
-                height={350} 
+                height={405} 
                 className="w-100"
-                style={{ height: 'auto' }}
+                style={{ height: '405px', objectFit: 'cover' }}
               />
               <div className="sc-div">
                 <ul>
@@ -32,7 +32,7 @@ export async function TeacherList() {
                 <span><Image src="/webImages/plus.png" alt="plus" width={20} height={20} /></span>
               </div>
             </div>
-            <div className="teacher-info">
+            <div className="teacher-info p-3">
               <h3>
                 <Link href={`/teachers/${teacher.slug}`} title={teacher.name}>
                   {teacher.name}

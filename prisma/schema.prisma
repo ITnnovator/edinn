@@ -69,6 +69,7 @@ model GalleryImage {
 model Notice {
   id        String   @id @default(cuid())
   content   String
+  image     String?
   isActive  Boolean  @default(true)
   startDate DateTime?
   endDate   DateTime?

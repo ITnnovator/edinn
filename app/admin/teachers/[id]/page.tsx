@@ -24,9 +24,8 @@ export default async function EditTeacherPage({ params }: { params: Promise<{ id
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold text-[#2B3674] mb-6">Edit Teacher</h1>
+    <>
       <TeacherForm teacher={formattedTeacher} />
-    </div>
+    </>
   );
 }

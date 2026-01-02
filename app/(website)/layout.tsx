@@ -3,10 +3,18 @@ import Script from 'next/script';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Scripts from '../../components/Scripts';
+import NoticePopup from '../../components/NoticePopup';
 
 export default function WebsiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="wrapper">
+      <NoticePopup />
+      {/* Legacy CSS - Scoped to Website Layout */}
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+      <link rel="stylesheet" type="text/css" href="/css/main.min.css" />
+      <link rel="stylesheet" type="text/css" href="/css/button.min.css" />
+
       <Header />
       {children}
       <Footer />

@@ -71,20 +71,30 @@ export async function createTeacher(data: FormData) {
 
         // Image Handling
         const imageFile = data.get("image") as File;
-        const detailImageFile = data.get("detailImage") as File;
         
         let imagePath = "";
-        let detailImagePath = "";
+        let detailImagePath = ""; // Mirror main image
 
         if (imageFile && imageFile.size > 0) {
             imagePath = await saveImage(imageFile);
-        }
-
-        if (detailImageFile && detailImageFile.size > 0) {
-            detailImagePath = await saveImage(detailImageFile);
+            detailImagePath = imagePath; 
         }
 
         const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") + "-" + Date.now().toString().slice(-4);
+
+        const calculateColor = (p: number) => {
+            const percentage = Number(p);
+            if (percentage > 80) return "#39ff14"; // Parrot Green
+            if (percentage >= 40) return "#ffeb3b"; // Yellow
+            return "#ff0000"; // Red
+        };
+
+        const cleanSocials = {
+            facebook: socials.facebook || "",
+            twitter: socials.twitter || "",
+            linkedin: socials.linkedin || "",
+            instagram: socials.instagram || "",
+        };
 
         await prisma.teacher.create({
             data: {
@@ -102,11 +112,11 @@ export async function createTeacher(data: FormData) {
                     create: skills.map((s: any) => ({
                         name: s.name,
                         percentage: Number(s.percentage),
-                        color: s.color
+                        color: calculateColor(s.percentage)
                     }))
                 },
                 socials: {
-                    create: socials
+                    create: cleanSocials
                 }
             },
         });
@@ -130,65 +140,90 @@ export async function updateTeacher(id: string, data: FormData) {
         const education = data.get("education") as string;
         const experience = data.get("experience") as string;
         
-        const skills = JSON.parse(data.get("skills") as string || "[]");
-        const socials = JSON.parse(data.get("socials") as string || "{}");
+        try {
+            const skills = JSON.parse(data.get("skills") as string || "[]");
+            const socials = JSON.parse(data.get("socials") as string || "{}");
+            console.log("Parsed skills/socials");
+            
+            const imageFile = data.get("image") as File;
+            
+            console.log("Updating teacher:", id);
+            console.log("New Email:", email);
+            console.log("New Name:", name);
 
-        const imageFile = data.get("image") as File;
-        const detailImageFile = data.get("detailImage") as File;
+            const teacher = await prisma.teacher.findUnique({ where: { id } });
+            if (!teacher) return { success: false, error: "Teacher not found" };
 
-        const teacher = await prisma.teacher.findUnique({ where: { id } });
-        if (!teacher) return { success: false, error: "Teacher not found" };
+            let imagePath = teacher.image;
+            let detailImagePath = teacher.detailImage;
 
-        let imagePath = teacher.image;
-        let detailImagePath = teacher.detailImage;
+            if (imageFile && imageFile.size > 0) {
+                console.log("Saving new image...");
+                imagePath = await saveImage(imageFile);
+                detailImagePath = imagePath; // Mirror main image to detail image
+            }
 
-        if (imageFile && imageFile.size > 0) {
-            imagePath = await saveImage(imageFile);
-        }
+            const cleanSocials = {
+                facebook: socials.facebook || "",
+                twitter: socials.twitter || "",
+                linkedin: socials.linkedin || "",
+                instagram: socials.instagram || "",
+            };
 
-        if (detailImageFile && detailImageFile.size > 0) {
-            detailImagePath = await saveImage(detailImageFile);
-        }
+            const calculateColor = (p: number) => {
+                const percentage = Number(p);
+                if (percentage > 80) return "#39ff14"; // Parrot Green
+                if (percentage >= 40) return "#ffeb3b"; // Yellow
+                return "#ff0000"; // Red
+            };
 
-        // Transaction to update teacher and replace skills/socials
-        await prisma.$transaction([
-            prisma.teacher.update({
-                where: { id },
-                data: {
-                    name,
-                    role,
-                    email,
-                    bio,
-                    dob,
-                    education,
-                    experience,
-                    image: imagePath,
-                    detailImage: detailImagePath,
-                    socials: {
-                        upsert: {
-                            create: socials,
-                            update: socials
+            console.log("Executing DB transaction...");
+            // Transaction to update teacher and replace skills/socials
+            await prisma.$transaction([
+                prisma.teacher.update({
+                    where: { id },
+                    data: {
+                        name,
+                        role,
+                        email,
+                        bio,
+                        dob,
+                        education,
+                        experience,
+                        image: imagePath,
+                        detailImage: detailImagePath,
+                        socials: {
+                            upsert: {
+                                create: cleanSocials,
+                                update: cleanSocials
+                            }
                         }
                     }
-                }
-            }),
-            prisma.skill.deleteMany({ where: { teacherId: id } }),
-            prisma.skill.createMany({
-                data: skills.map((s: any) => ({
-                    teacherId: id,
-                    name: s.name,
-                    percentage: Number(s.percentage),
-                    color: s.color
-                }))
-            })
-        ]);
-
-        revalidatePath("/admin/teachers");
-        revalidatePath("/about");
-        return { success: true };
-    } catch (error) {
+                }),
+                prisma.skill.deleteMany({ where: { teacherId: id } }),
+                prisma.skill.createMany({
+                    data: skills.map((s: any) => ({
+                        teacherId: id,
+                        name: s.name,
+                        percentage: Number(s.percentage),
+                        color: calculateColor(s.percentage)
+                    }))
+                })
+            ]);
+            console.log("Transaction successful");
+            
+            revalidatePath("/admin/teachers");
+            revalidatePath(`/admin/teachers/${id}`);
+            revalidatePath("/about");
+            revalidatePath(`/teachers/${teacher.slug}`);
+            return { success: true };
+        } catch (e: any) {
+             console.error("Inner update error:", e);
+             throw e; // Rethrow to outer catch
+        }
+    } catch (error: any) {
         console.error("Failed to update teacher:", error);
-        return { success: false, error: "Failed to update teacher" };
+        return { success: false, error: error.message || "Failed to update teacher" };
     }
 }
 

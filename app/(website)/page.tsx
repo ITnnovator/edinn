@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import LightBoxGallery from '@/components/LightBoxGallery';
+import DynamicHomeGallery from '@/components/DynamicHomeGallery';
 
 export default function Home() {
   return (
@@ -131,18 +131,8 @@ export default function Home() {
           {/* about-rw end */}
 
           <div className="abt-img">
-            <LightBoxGallery layout="masonry" images={[
-              { src: "/webImages/gallery_edmin/gallery01.jpg", alt: "Engineers & Doctors School Gallery", className: "width1 wow zoomIn" },
-              { src: "/webImages/gallery_edmin/gallery02.jpg", alt: "Engineers & Doctors School Gallery", className: "width2 wow zoomIn" },
-              { src: "/webImages/gallery_edmin/gallery03.jpg", alt: "Engineers & Doctors School Gallery", className: "width3 wow zoomIn" },
-              { src: "/webImages/gallery_edmin/gallery04.jpg", alt: "Engineers & Doctors School Gallery", className: "width4 wow zoomIn" },
-              { src: "/webImages/gallery_edmin/gallery05.jpg", alt: "Engineers & Doctors School Gallery", className: "width5 wow zoomIn" },
-              { src: "/webImages/gallery_edmin/gallery06.jpg", alt: "Engineers & Doctors School Gallery", className: "width6 wow zoomIn" },
-              { src: "/webImages/gallery_edmin/gallery07.jpg", alt: "Engineers & Doctors School Gallery", className: "width7 wow zoomIn" },
-              { src: "/webImages/gallery_edmin/gallery08.jpg", alt: "Engineers & Doctors School Gallery", className: "width8 wow zoomIn" },
-              { src: "/webImages/gallery_edmin/gallery09.jpg", alt: "Engineers & Doctors School Gallery", className: "width9 wow zoomIn" },
-              { src: "/webImages/gallery_edmin/gallery10.jpg", alt: "Engineers & Doctors School Gallery", className: "width10 wow zoomIn" },
-            ]} />
+            {/* Dynamic Gallery: Home */}
+            <DynamicHomeGallery />
           </div>
           {/* abt-img end */}
         </div>

@@ -270,30 +270,7 @@ export default function About() {
       </section>
       {/* classes-section end */}
 
-      {/* teachers-section start */}
-      <section className="teachers-section">
-        <div className="container">
-          <div className="section-title text-center">
-            <h2>
-              Meet Our<br />
-              Teachers
-            </h2>
-            <p>
-              Our teaching team combines strong subject expertise with care and guidance,
-              helping students learn confidently through modern, student-centered methods.
-            </p>
-          </div>
-          {/* section-title end */}
 
-          <div className="teachers">
-            <div className="row">
-              <TeacherList />
-            </div>
-          </div>
-          {/* teachers end */}
-        </div>
-      </section>
-      {/* teachers-section end */}
 
       {/* newsletter-sec starts here */}
       <section className="newsletter-section">

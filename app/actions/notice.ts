@@ -1,0 +1,83 @@
+"use server";
+
+import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
+import { writeFile, mkdir } from "fs/promises";
+import { join } from "path";
+
+export async function getNotice() {
+    try {
+        let notice = await prisma.notice.findFirst();
+        
+        if (!notice) {
+            notice = await prisma.notice.create({
+                data: {
+                    content: "Welcome to our website!",
+                    isActive: false
+                }
+            });
+        }
+        
+        return { success: true, data: notice };
+    } catch (error) {
+        console.error("Failed to fetch notice:", error);
+        return { success: false, error: "Failed to fetch notice" };
+    }
+}
+
+export async function updateNotice(formData: FormData) {
+    try {
+        const content = formData.get("content") as string;
+        const isActive = formData.get("isActive") === "true";
+        const imageFile = formData.get("image") as File | null;
+        
+        // Get existing notice ID
+        const existingNotice = await prisma.notice.findFirst();
+        const id = existingNotice?.id;
+
+        // @ts-ignore
+        let imageUrl = existingNotice?.image;
+
+        // Handle Image Upload
+        if (imageFile && imageFile.size > 0) {
+            const uploadDir = join(process.cwd(), "public", "uploads", "notices");
+            await mkdir(uploadDir, { recursive: true });
+
+            const buffer = Buffer.from(await imageFile.arrayBuffer());
+            const filename = `${Date.now()}-${imageFile.name.replace(/[^a-zA-Z0-9.-]/g, "")}`;
+            const filepath = join(uploadDir, filename);
+
+            await writeFile(filepath, buffer);
+            imageUrl = `/uploads/notices/${filename}`;
+        }
+
+        if (id) {
+            await prisma.notice.update({
+                where: { id },
+                data: {
+                    content,
+                    isActive,
+                    // @ts-ignore
+                    image: imageUrl
+                }
+            });
+        } else {
+            await prisma.notice.create({
+                data: {
+                    content,
+                    isActive,
+                    // @ts-ignore
+                    image: imageUrl
+                }
+            });
+        }
+
+        revalidatePath("/");
+        revalidatePath("/admin/notices");
+        return { success: true };
+
+    } catch (error: any) {
+        console.error("Failed to update notice:", error);
+        return { success: false, error: error.message || "Failed to update notice" };
+    }
+}

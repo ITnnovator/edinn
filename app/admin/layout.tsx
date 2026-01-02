@@ -3,8 +3,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Toaster } from 'react-hot-toast';
 
 import { signOut } from 'next-auth/react';
+
+import Image from 'next/image';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -49,16 +52,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             transition: 'width 0.3s ease'
           }}
         >
-          <div className="sidebar-header">
             {isSidebarOpen && (
-              <h2 style={{ margin: 0 }}>
-                Admin Panel
-              </h2>
+              <div className="logo-container" style={{ padding: '0 24px', marginBottom: '20px' }}>
+                <Image 
+                  src="/webImages/logo.png" 
+                  alt="E&D School" 
+                  width={180}
+                  height={60}
+                  style={{ width: 'auto', height: '50px' }}
+                  priority
+                />
+              </div>
             )}
-            <button onClick={toggleSidebar} className="toggle-btn">
-              <i className={`fa ${isSidebarOpen ? 'fa-angle-left' : 'fa-angle-right'}`}></i>
-            </button>
-          </div>
 
           <nav className="sidebar-nav">
             <ul>
@@ -100,7 +105,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </header>
         )}
         <div className={`content-wrapper ${isLoginPage ? 'login-wrapper' : ''}`} style={{ padding: isLoginPage ? 0 : '30px' }}>
-          {children}
+          <Toaster position="top-right" reverseOrder={false} />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={pathname}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              style={{ height: '100%' }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </main>
 
@@ -109,7 +126,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           --admin-bg: #f4f7fe;
           --admin-sidebar-bg: #ffffff;
           --admin-text: #2b3674;
-          --admin-active: #4318ff;
+          --admin-active: #000000;
           --glass-border: rgba(255, 255, 255, 0.2);
         }
 
@@ -121,22 +138,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         .admin-container {
           display: flex;
-          min-height: 100vh;
+          height: 100vh; /* Fixed height viewport */
+          overflow: hidden; /* Prevent body scroll */
           background: var(--admin-bg);
           color: var(--admin-text);
-          font-family: 'DM Sans', sans-serif;
+          /* Removed 'DM Sans' to use default system fonts */
         }
 
         .admin-sidebar {
           background: var(--admin-sidebar-bg);
-          height: 100vh;
-          position: sticky;
-          top: 0;
+          height: 100%; /* Full height of container */
           display: flex;
           flex-direction: column;
           border-right: 1px solid rgba(0,0,0,0.05);
-          overflow: hidden;
+          overflow-y: auto; /* Allow sidebar itself to scroll if needed */
           z-index: 100;
+          flex-shrink: 0; /* Prevent sidebar shrinking */
         }
 
         .sidebar-header {
@@ -145,6 +162,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           align-items: center;
           justify-content: space-between;
           height: 80px;
+          flex-shrink: 0;
         }
 
         .sidebar-header h2 {
@@ -166,6 +184,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         .sidebar-nav {
           flex: 1;
           padding: 20px 0;
+          overflow-y: auto; /* Internal nav scroll */
         }
 
         .sidebar-nav ul {
@@ -205,6 +224,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         .sidebar-footer {
           padding: 20px;
           border-top: 1px solid rgba(0,0,0,0.05);
+          flex-shrink: 0;
         }
 
         .logout-btn {
@@ -226,6 +246,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           flex: 1;
           display: flex;
           flex-direction: column;
+          height: 100%; /* Full height */
+          overflow: hidden; /* Prevent double scrollbars */
+          position: relative;
         }
 
         .admin-header {
@@ -236,6 +259,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           padding: 0 30px;
           background: rgba(255,255,255,0.5);
           backdrop-filter: blur(10px);
+          flex-shrink: 0;
+          border-bottom: 1px solid rgba(0,0,0,0.02);
         }
 
         .breadcrumbs {
@@ -246,7 +271,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         .content-wrapper {
           padding: 30px;
           flex: 1;
-          overflow-y: auto;
+          overflow-y: auto; /* SCROLL HERE */
+          height: 100%;
         }
 
         .user-profile {
@@ -266,6 +292,28 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           align-items: center;
           justify-content: center;
           font-weight: bold;
+        }
+      `}</style>
+      
+      {/* Enhanced Modern Modern CSS overrides */}
+      <style jsx global>{`
+        .sidebar-nav li a {
+          border-radius: 12px;
+          margin: 0 10px;
+          width: calc(100% - 20px) !important;
+        }
+
+        .sidebar-nav li.active a,
+        .sidebar-nav li a:hover {
+            background: #000000;
+            color: white !important;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-right: none;
+        }
+        
+        .sidebar-nav li.active i,
+        .sidebar-nav li a:hover i {
+           color: white !important;
         }
       `}</style>
     </div>
