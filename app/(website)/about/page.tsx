@@ -28,7 +28,7 @@ export default async function About() {
                 </Link>
               </li>
               <li>
-                <span>About</span>
+                <span>About Us</span>
               </li>
             </ul>
           </div>
