@@ -1,0 +1,254 @@
+@-webkit-keyframes mdp-float-aura {
+    from {
+        box-shadow: 0 0 0 -1px var(--hmp-color-75), 0 0 0 -1px var(--hmp-color-50), 0 0 0 -1px var(--hmp-color-25)
+    }
+
+    to {
+        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0), 0 0 0 30px rgba(255, 255, 255, 0), 0 0 0 45px rgba(255, 255, 255, 0)
+    }
+}
+
+@keyframes mdp-float-aura {
+    from {
+        box-shadow: 0 0 0 -1px var(--hmp-color-75), 0 0 0 -1px var(--hmp-color-50), 0 0 0 -1px var(--hmp-color-25)
+    }
+
+    to {
+        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0), 0 0 0 30px rgba(255, 255, 255, 0), 0 0 0 45px rgba(255, 255, 255, 0)
+    }
+}
+
+@-webkit-keyframes mdp-float-init {
+    0% {
+        opacity: 0;
+        transform: scale(.25)
+    }
+
+    50% {
+        opacity: 0
+    }
+
+    80% {
+        transform: scale(1);
+        opacity: 1
+    }
+
+    90% {
+        transform: scale(1.2)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+@keyframes mdp-float-init {
+    0% {
+        opacity: 0;
+        transform: scale(.25)
+    }
+
+    50% {
+        opacity: 0
+    }
+
+    80% {
+        transform: scale(1);
+        opacity: 1
+    }
+
+    90% {
+        transform: scale(1.2)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+.mdp-float {
+    --hmp-color: rgb(19, 94, 158);
+    --hmp-color-75: rgba(19, 94, 158, .75);
+    --hmp-color-50: rgba(19, 94, 158, .5);
+    --hmp-color-25: rgba(19, 94, 158, .25);
+    --hmp-color-5: rgba(19, 94, 158, .05);
+    position: fixed;
+    z-index: 999999;
+    border-radius: 50%;
+    bottom: 3em;
+    right: 3em;
+    width: 3em;
+    height: 3em;
+    transition: .75s;
+    transition-timing-function: ease-out
+}
+
+.mdp-float:hover {
+    -webkit-animation: mdp-float-aura infinite;
+    animation: mdp-float-aura infinite;
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s
+}
+
+.mdp-float.mdp-float-inertia {
+    transition: .25s
+}
+
+.mdp-float.mdp-float-slow {
+    transition-delay: .5s;
+    transition: 5s
+}
+
+.mdp-float.mdp-float-init {
+    -webkit-animation: mdp-float-init 1s;
+    animation: mdp-float-init 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+}
+
+.mdp-float-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    text-shadow: 1px 0 0 var(--hmp-color);
+    background-image: linear-gradient(210deg, var(--hmp-color-5) 0, var(--hmp-color-25) 100%);
+    background-color: #fff;
+    transition: .25s;
+    box-shadow: 0 7px 13px -3px var(--hmp-color-25), 0 2px 4px 0 var(--hmp-color-50), inset 0 0 0 0 var(--hmp-color);
+    position: relative
+}
+
+.mdp-float-btn:before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--hmp-color);
+    border-radius: 50%;
+    transform: scale(0);
+    transition-property: transform;
+    transition-duration: .25s;
+    transition-timing-function: ease-out
+}
+
+.mdp-float-btn svg {
+    width: 1em;
+    height: 1em;
+    fill: var(--hmp-color);
+    z-index: 2
+}
+
+.mdp-float-btn:focus {
+    outline: 0
+}
+
+.mdp-float-btn:hover {
+    transition: .25s;
+    transition-delay: 125ms;
+    box-shadow: 0 7px 26px -3px var(--hmp-color-25), 0 2px 8px 0 var(--hmp-color-50);
+    border: none
+}
+
+.mdp-float-btn:hover:before {
+    transform: scale(1)
+}
+
+.mdp-float-btn:hover svg {
+    transform: scale(1.1);
+    fill: #fff
+}
+
+.mdp-float-btn:active {
+    transform: scale(.75)
+}
+
+@media (max-width:720px) {
+    .mdp-float {
+        /* top: 1.5em; */
+        right: 1.5em
+    }
+}
+
+/* Always animate the floating button (aura loop) */
+.mdp-float.mdp-float-always {
+    -webkit-animation: mdp-float-aura 2s infinite;
+    animation: mdp-float-aura 2s infinite;
+}
+
+/* Tooltip: always visible, styled pill, slight shake */
+.mdp-tooltip {
+    position: absolute;
+    top: 50%;
+    right: 120%;
+    transform: translateY(-50%);
+    background: var(--hmp-color);
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 1000000;
+    opacity: 1;
+    /* always visible */
+    pointer-events: none;
+    animation: mdp-tooltip-shake 3s ease-in-out infinite;
+}
+
+.mdp-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--hmp-color);
+}
+
+.mdp-float-btn img{
+    width: 30px;
+    height: 30px;
+    z-index: 2;
+    transition: all .3s ease-in-out;
+}
+
+.mdp-float-btn:hover img{
+    filter: brightness(0) invert(1);
+}
+
+/* subtle shake animation */
+@keyframes mdp-tooltip-shake {
+
+    0%,
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    10% {
+        transform: translateY(-50%) translateX(-2px);
+    }
+
+    20% {
+        transform: translateY(-50%) translateX(2px);
+    }
+
+    30% {
+        transform: translateY(-50%) translateX(-1px);
+    }
+
+    40% {
+        transform: translateY(-50%) translateX(1px);
+    }
+
+    50% {
+        transform: translateY(-50%) translateX(0);
+    }
+}

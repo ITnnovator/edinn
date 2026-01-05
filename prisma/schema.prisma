@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -16,8 +15,6 @@ model User {
   role      String   @default("ADMIN")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map("user")
 }
 
 model Teacher {
@@ -38,8 +35,6 @@ model Teacher {
   // Relations
   skills      Skill[]
   socials     Social?
-
-  @@map("teacher")
 }
 
 model Skill {
@@ -49,8 +44,6 @@ model Skill {
   color       String?
   teacherId   String
   teacher     Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
-
-  @@map("skill")
 }
 
 model Social {
@@ -61,8 +54,6 @@ model Social {
   instagram String?
   teacherId String  @unique
   teacher   Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
-
-  @@map("social")
 }
 
 model GalleryImage {
@@ -73,8 +64,6 @@ model GalleryImage {
   width     Int?
   height    Int?
   createdAt DateTime @default(now())
-
-  @@map("galleryimage")
 }
 
 model Notice {
@@ -86,8 +75,6 @@ model Notice {
   endDate   DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map("notice")
 }
 
 model Certificate {
@@ -100,6 +87,4 @@ model Certificate {
   pdfPath        String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-
-  @@map("certificate")
 }
