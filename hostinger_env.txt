@@ -6,9 +6,17 @@
 # Database Connection (Fixed URL)
 DATABASE_URL="mysql://u511174624_edschool_pk:7Os%3AC%2B%3AW@srv2024.hstgr.io:3306/u511174624_edschool_pk"
 
-# Authentication Secrets
-NEXTAUTH_SECRET="438cc16dca061850487092f3aabd7b27e8dd99ff3415ce7097bed56a69455844"
-NEXTAUTH_URL="https://your-domain.com" 
+# Authentication Secrets (NextAuth v5)
+# Use 'openssl rand -base64 32' or a similar tool to generate a secret
+AUTH_SECRET="438cc16dca061850487092f3aabd7b27e8dd99ff3415ce7097bed56a69455844"
+
+# The public URL of your site (NO trailing slash)
+AUTH_URL="https://lawngreen-manatee-104708.hostingersite.com"
+# Alias for compatibility
+NEXTAUTH_URL="https://lawngreen-manatee-104708.hostingersite.com"
+
+# Trust the Hostinger proxy (Required for v5)
+AUTH_TRUST_HOST="true"
 
 # Node Environment
 NODE_ENV="production"
