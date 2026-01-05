@@ -2,8 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { writeFile, mkdir, unlink } from "fs/promises";
-import { join } from "path";
+import { put, del } from "@vercel/blob";
 
 import { GalleryImage } from "@prisma/client";
 
@@ -46,15 +45,13 @@ export async function uploadGalleryImage(formData: FormData): Promise<SingleGall
 
     // Ensure unique filename
     const filename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "")}`;
-    const uploadDir = join(process.cwd(), "public", "uploads", "gallery");
 
-    // Create dir if not exists
-    await mkdir(uploadDir, { recursive: true });
+    // Upload to Vercel Blob
+    const blob = await put(`gallery/${filename}`, file, {
+      access: 'public',
+    });
 
-    const filepath = join(uploadDir, filename);
-    await writeFile(filepath, buffer);
-
-    const imageUrl = `/uploads/gallery/${filename}`;
+    const imageUrl = blob.url;
 
     const newImage = await prisma.galleryImage.create({
       data: {
@@ -85,12 +82,13 @@ export async function deleteGalleryImage(id: string): Promise<GalleryResponse> {
       return { success: false, error: "Image not found" };
     }
 
-    // Attempt to delete file from filesystem
+    // Attempt to delete file from blob storage
     try {
-      const filepath = join(process.cwd(), "public", image.url);
-      await unlink(filepath);
-    } catch (fsError) {
-      console.warn("Failed to delete file from disk (might not exist):", fsError);
+      if (image.url.startsWith('http')) {
+        await del(image.url);
+      }
+    } catch (blobError) {
+      console.warn("Failed to delete file from blob storage:", blobError);
     }
 
     await prisma.galleryImage.delete({
@@ -113,10 +111,10 @@ export async function deleteBulkGalleryImages(ids: string[]): Promise<GalleryRes
     for (const id of ids) {
       await deleteGalleryImage(id);
     }
-    
+
     // Bulk revalidation is handled inside deleteGalleryImage, but specific checks technically safer
     revalidatePath("/admin/gallery");
-    
+
     return { success: true };
   } catch (error) {
     console.error("Failed to bulk delete images:", error);

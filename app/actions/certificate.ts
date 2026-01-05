@@ -3,8 +3,7 @@
 import { prisma } from '@/lib/prisma';
 import { generateCertificatePDF } from '@/lib/certificate-utils';
 import { z } from 'zod';
-import fs from 'fs';
-import path from 'path';
+import { put, del } from '@vercel/blob';
 import crypto from 'crypto';
 import { revalidatePath } from 'next/cache';
 
@@ -51,16 +50,13 @@ export async function generateCertificateAction(formData: FormData) {
 
         // We need to know the path to save in DB.
         const fileName = `${verifyCode}.pdf`;
-        const publicDir = path.join(process.cwd(), 'public', 'certificates');
-        if (!fs.existsSync(publicDir)) {
-            fs.mkdirSync(publicDir, { recursive: true });
-        }
-        const filePath = path.join(publicDir, fileName);
+        // Upload to Vercel Blob
+        const blob = await put(`certificates/${fileName}`, Buffer.from(pdfBytes), {
+            access: 'public',
+            contentType: 'application/pdf',
+        });
 
-        // Write file
-        fs.writeFileSync(filePath, pdfBytes);
-
-        const pdfUrl = `/certificates/${fileName}`;
+        const pdfUrl = blob.url;
 
         // Save to DB
         const certificate = await prisma.certificate.create({
@@ -143,17 +139,12 @@ export async function deleteCertificateAction(verifyCode: string) {
         }
 
         // 2. Delete file from filesystem if it exists
-        if (cert.pdfPath) {
-            // pdfPath is like '/certificates/CODE.pdf'
-            // We need to resolve this to the absolute system path
-            // relative path from public folder: 'certificates/CODE.pdf'
-
-            // Remove leading slash if present
-            const relativePath = cert.pdfPath.startsWith('/') ? cert.pdfPath.slice(1) : cert.pdfPath;
-            const absolutePath = path.join(process.cwd(), 'public', relativePath);
-
-            if (fs.existsSync(absolutePath)) {
-                fs.unlinkSync(absolutePath);
+        // 2. Delete file from blob storage
+        if (cert.pdfPath && cert.pdfPath.startsWith('http')) {
+            try {
+                await del(cert.pdfPath);
+            } catch (blobError) {
+                console.warn("Failed to delete certificate from blob:", blobError);
             }
         }
 

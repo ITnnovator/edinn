@@ -4,8 +4,7 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { teachers as staticTeachers } from "@/lib/teachers";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
+import { put } from "@vercel/blob";
 
 export async function getTeachers() {
     try {
@@ -295,19 +294,11 @@ export async function seedTeachers() {
 }
 
 // Helper to save uploaded images
+// Helper to save uploaded images
 async function saveImage(file: File): Promise<string> {
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    // Ensure unique filename
     const filename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "")}`;
-    const uploadDir = join(process.cwd(), "public", "uploads", "teachers");
-
-    // Create dir if not exists
-    await mkdir(uploadDir, { recursive: true });
-
-    const filepath = join(uploadDir, filename);
-    await writeFile(filepath, buffer);
-
-    return `/uploads/teachers/${filename}`;
+    const blob = await put(`teachers/${filename}`, file, {
+        access: 'public',
+    });
+    return blob.url;
 }
