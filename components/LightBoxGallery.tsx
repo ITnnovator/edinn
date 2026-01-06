@@ -49,46 +49,51 @@ export default function LightBoxGallery({
     const effectiveLayout = layout || (enableMasonry ? 'masonry' : 'masonry');
 
     useEffect(() => {
-        // Initialize Isotope only for 'masonry' mode if needed, or 'insta' if it uses isotope too?
-        // The user's code for LightBoxGallery previously had Isotope logic.
-        // The 'insta' classes typically imply an Instagram feed style, possibly grid or flex.
-        // We'll preserve the Isotope init for now as it was in the user's provided file.
-        
-        if (typeof window !== "undefined" && window.jQuery) {
-            const $ = window.jQuery;
-            // logic...
-             // We only run isotope if it's the masonry layout or if the user explicitly provided logic for it.
-             // The user's provided code ran it unconditionally on the container ref.
-             // Let's keep it safe.
-            const $container = $(containerRef.current);
-             
-            const init = () => {
-                if ($container.length > 0 && $.fn.isotope) {
-                    // Check if we verify imagesLoaded
-                    if ($container.imagesLoaded) {
-                        $container.imagesLoaded(() => {
-                            $container.isotope({ masonry: { columnWidth: 0.5 } });
+        if (effectiveLayout !== 'masonry') return;
+
+        let intervalId: NodeJS.Timeout;
+        let attempts = 0;
+        const maxAttempts = 20; // 4 seconds total polling
+
+        const initMasonry = () => {
+            if (typeof window !== "undefined" && window.jQuery && window.jQuery.fn.isotope && window.jQuery.fn.imagesLoaded) {
+                const $ = window.jQuery;
+                const $container = $(containerRef.current);
+
+                if ($container.length > 0) {
+                    $container.imagesLoaded(() => {
+                        $container.isotope({
+                            itemSelector: 'li',
+                            masonry: {
+                                columnWidth: 'li' // Use li as column width reference
+                            }
                         });
-                    } else {
+                        // Forced layout after a small delay to catch any missed updates
                         setTimeout(() => {
-                            $container.isotope({ masonry: { columnWidth: 0.5 } });
+                            $container.isotope('layout');
                         }, 500);
-                    }
+                    });
+                    
+                    clearInterval(intervalId);
+                    return true;
                 }
-            };
-            
-            // Only run isotope if we are in a mode that needs it? 
-            // The Home page (masonry) definitely used it.
-            // Check if 'insta-flex' uses it? Probably not, usually just flexbox.
-            // But running it might break flex.
-            // Let's only run it if layout === 'masonry'.
-            
-            if (effectiveLayout === 'masonry') {
-                init();
-                const timer = setTimeout(init, 200);
-                return () => clearTimeout(timer);
             }
+            return false;
+        };
+
+        // Try immediately
+        if (!initMasonry()) {
+            intervalId = setInterval(() => {
+                attempts++;
+                if (initMasonry() || attempts >= maxAttempts) {
+                    clearInterval(intervalId);
+                }
+            }, 200);
         }
+
+        return () => {
+            if (intervalId) clearInterval(intervalId);
+        };
     }, [images, effectiveLayout]);
 
     const handleClick = (i: number, e: React.MouseEvent) => {
@@ -139,6 +144,20 @@ export default function LightBoxGallery({
 
     return (
         <>
+            <style jsx>{`
+                .masonary {
+                    display: flex;
+                    flex-wrap: wrap;
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    width: 100%;
+                }
+                /* Once isotope-layout is active, it will use position absolute */
+                .masonary.isotope {
+                    display: block;
+                }
+            `}</style>
             <ul className={containerClass} ref={containerRef as React.RefObject<HTMLUListElement>}>
                 {images.map((img, i) => (
                     <li key={i} className={img.className || `width${(i % 10) + 1} wow zoomIn`} data-wow-duration="1000ms">
