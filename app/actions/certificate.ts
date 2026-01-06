@@ -50,6 +50,14 @@ export async function generateCertificateAction(formData: FormData) {
 
         let pdfUrl = '';
 
+        // DEBUG LOGGING
+        console.log('Certificate Generation Debug:', {
+            hasToken: !!process.env.BLOB_READ_WRITE_TOKEN,
+            nodeEnv: process.env.NODE_ENV,
+            vercel: process.env.VERCEL,
+            allKeys: Object.keys(process.env).filter(k => k.includes('BLOB'))
+        });
+
         // Check if Vercel Blob is configured
         if (process.env.BLOB_READ_WRITE_TOKEN) {
              const fileName = `${verifyCode}.pdf`;
