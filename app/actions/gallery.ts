@@ -49,6 +49,7 @@ export async function uploadGalleryImage(formData: FormData): Promise<SingleGall
     // Upload to Vercel Blob
     const blob = await put(`gallery/${filename}`, file, {
       access: 'public',
+      token: process.env.BLOB_READ_WRITE_TOKEN,
     });
 
     const imageUrl = blob.url;

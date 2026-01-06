@@ -42,6 +42,7 @@ export async function updateNotice(formData: FormData) {
             const filename = `${Date.now()}-${imageFile.name.replace(/[^a-zA-Z0-9.-]/g, "")}`;
             const blob = await put(`notices/${filename}`, imageFile, {
                 access: 'public',
+                token: process.env.BLOB_READ_WRITE_TOKEN,
             });
             imageUrl = blob.url;
         }

@@ -65,6 +65,7 @@ export async function generateCertificateAction(formData: FormData) {
             const blob = await put(`certificates/${fileName}`, Buffer.from(pdfBytes), {
                 access: 'public',
                 contentType: 'application/pdf',
+                token: process.env.BLOB_READ_WRITE_TOKEN,
             });
             pdfUrl = blob.url;
         } else {

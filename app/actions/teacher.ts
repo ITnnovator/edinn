@@ -313,6 +313,7 @@ async function saveImage(file: File): Promise<string> {
     const filename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "")}`;
     const blob = await put(`teachers/${filename}`, file, {
         access: 'public',
+        token: process.env.BLOB_READ_WRITE_TOKEN,
     });
     return blob.url;
 }
