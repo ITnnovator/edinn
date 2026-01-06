@@ -48,15 +48,34 @@ export async function generateCertificateAction(formData: FormData) {
             verifyCode
         }, baseUrl);
 
-        // We need to know the path to save in DB.
-        const fileName = `${verifyCode}.pdf`;
-        // Upload to Vercel Blob
-        const blob = await put(`certificates/${fileName}`, Buffer.from(pdfBytes), {
-            access: 'public',
-            contentType: 'application/pdf',
-        });
+        let pdfUrl = '';
 
-        const pdfUrl = blob.url;
+        // Check if Vercel Blob is configured
+        if (process.env.BLOB_READ_WRITE_TOKEN) {
+             const fileName = `${verifyCode}.pdf`;
+            // Upload to Vercel Blob
+            const blob = await put(`certificates/${fileName}`, Buffer.from(pdfBytes), {
+                access: 'public',
+                contentType: 'application/pdf',
+            });
+            pdfUrl = blob.url;
+        } else {
+            // Fallback: Save locally to public/certificates
+            const fs = await import('fs');
+            const path = await import('path');
+            
+            const certDir = path.join(process.cwd(), 'public', 'certificates');
+            if (!fs.existsSync(certDir)) {
+                fs.mkdirSync(certDir, { recursive: true });
+            }
+            
+            const fileName = `${verifyCode}.pdf`;
+            const filePath = path.join(certDir, fileName);
+            fs.writeFileSync(filePath, Buffer.from(pdfBytes));
+            
+            // Construct URL relative to public
+            pdfUrl = `/certificates/${fileName}`;
+        }
 
         // Save to DB
         const certificate = await prisma.certificate.create({
@@ -74,7 +93,8 @@ export async function generateCertificateAction(formData: FormData) {
         return { success: true, certificate };
     } catch (error) {
         console.error('Failed to generate certificate:', error);
-        return { error: 'Failed to generate certificate', details: String(error) };
+        // Returns the actual error message to the client for easier debugging
+        return { error: 'Failed to generate certificate', details: error instanceof Error ? error.message : String(error) };
     }
 }
 
@@ -138,13 +158,30 @@ export async function deleteCertificateAction(verifyCode: string) {
             return { success: false, error: 'Certificate not found' };
         }
 
-        // 2. Delete file from filesystem if it exists
-        // 2. Delete file from blob storage
-        if (cert.pdfPath && cert.pdfPath.startsWith('http')) {
-            try {
-                await del(cert.pdfPath);
-            } catch (blobError) {
-                console.warn("Failed to delete certificate from blob:", blobError);
+        // 2. Delete file
+        if (cert.pdfPath) {
+            if (cert.pdfPath.startsWith('http')) {
+                // Vercel Blob
+                try {
+                    await del(cert.pdfPath);
+                } catch (blobError) {
+                    console.warn("Failed to delete certificate from blob:", blobError);
+                }
+            } else {
+                // Local File
+                try {
+                    const fs = await import('fs');
+                    const path = await import('path');
+                    // Remove leading slash to join correctly
+                    const relativePath = cert.pdfPath.startsWith('/') ? cert.pdfPath.substring(1) : cert.pdfPath;
+                    const filePath = path.join(process.cwd(), 'public', relativePath);
+                    
+                    if (fs.existsSync(filePath)) {
+                        fs.unlinkSync(filePath);
+                    }
+                } catch (localError) {
+                    console.warn("Failed to delete local certificate file:", localError);
+                }
             }
         }
 

@@ -12,6 +12,10 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
       {/* Legacy CSS - Scoped to Website Layout */}
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+      
+      {/* Local CSS - Moved from Root Layout */}
+      <link rel="stylesheet" type="text/css" href="/css/main.min.css" />
+      <link rel="stylesheet" type="text/css" href="/css/button.min.css" />
 
       <Header />
       {children}
