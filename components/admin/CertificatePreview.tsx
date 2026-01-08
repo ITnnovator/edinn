@@ -4,13 +4,11 @@ import React, { useEffect, useState, useRef } from 'react';
 
 interface CertificatePreviewProps {
     studentName: string;
-    designation: string;
     universityName: string;
 }
 
 const CertificatePreview: React.FC<CertificatePreviewProps> = ({
     studentName,
-    designation,
     universityName,
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -69,40 +67,23 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                 <div
                     style={{
                         position: 'absolute',
-                        top: '770px',
+                        top: '765px',
                         left: 0,
                         width: '2000px',
                         textAlign: 'center',
-                        fontSize: '70px',
-                        fontFamily: 'Poppins, Helvetica, Arial, sans-serif',
+                        fontSize: '105px',
+                        fontFamily: "'Great Vibes', cursive",
                         color: '#000000',
-                        fontWeight: 'bold',
+                        fontWeight: 'normal', // Great Vibes is naturally weighted, bold might look bad
                         lineHeight: 1,
-                        textTransform: 'uppercase',
+                        // textTransform: 'uppercase', // Cursive shouldn't be forced uppercase
                         transform: 'translateY(-100%)', // Sits on the line
                     }}
                 >
-                    {studentName || 'STUDENT NAME'}
+                    {studentName || 'Student Name'}
                 </div>
 
-                {/* Designation */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: '860px',
-                        left: 0,
-                        width: '2000px',
-                        textAlign: 'center',
-                        fontSize: '35px',
-                        fontFamily: 'Poppins, Helvetica, Arial, sans-serif',
-                        color: '#000000',
-                        fontWeight: 'normal',
-                        lineHeight: 1,
-                        transform: 'translateY(-100%)',
-                    }}
-                >
-                    {designation || 'Designation'}
-                </div>
+
 
                 {/* University Name */}
                 <div
@@ -112,15 +93,15 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                         left: 0,
                         width: '2000px',
                         textAlign: 'center',
-                        fontSize: '35px',
-                        fontFamily: 'Poppins, Helvetica, Arial, sans-serif',
+                        fontSize: '52.5px', // 35px + 50%
+                        fontFamily: "'Playfair Display', serif",
                         color: '#000000',
-                        fontWeight: 'normal',
+                        fontWeight: 600,
                         lineHeight: 1,
                         transform: 'translateY(-100%)',
                     }}
                 >
-                    {universityName || 'University Name'}
+                    {universityName || 'In recognition of...'}
                 </div>
 
                 {/* QR Code Placeholder */}

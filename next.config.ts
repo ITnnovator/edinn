@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  serverExternalPackages: ['fontkit'],
 };
 
 export default nextConfig;

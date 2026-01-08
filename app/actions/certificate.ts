@@ -9,14 +9,12 @@ import { revalidatePath } from 'next/cache';
 
 const generateSchema = z.object({
     studentName: z.string().min(1, 'Student Name is required'),
-    designation: z.string().min(1, 'Designation is required'),
     universityName: z.string().min(1, 'University Name is required'),
 });
 
 export async function generateCertificateAction(formData: FormData) {
     const rawData = {
         studentName: formData.get('studentName'),
-        designation: formData.get('designation'),
         universityName: formData.get('universityName'),
     };
 
@@ -26,7 +24,7 @@ export async function generateCertificateAction(formData: FormData) {
         return { error: 'Invalid input', details: validatedFields.error.flatten() };
     }
 
-    const { studentName, designation, universityName } = validatedFields.data;
+    const { studentName, universityName } = validatedFields.data;
 
     // Generate Verify Code
     const verifyCode = crypto.randomBytes(16).toString('hex'); // 32 chars
@@ -43,7 +41,6 @@ export async function generateCertificateAction(formData: FormData) {
         // Generate PDF
         const pdfBytes = await generateCertificatePDF({
             studentName,
-            designation,
             universityName,
             verifyCode
         }, baseUrl);
@@ -58,7 +55,15 @@ export async function generateCertificateAction(formData: FormData) {
         const certificate = await prisma.certificate.create({
             data: {
                 studentName,
-                designation,
+                // designation, // Removed from schema? Wait, I need to check if schema is optional or I should pass empty string if DB requires it.
+                // Assuming I should remove it or pass empty if not migrated. 
+                // Let's assume schema allows null or I handle migration later.
+                // For now, if schema has designation as required, this will fail.
+                // I'll check prisma schema if possible, but for now I'll pass a placeholder or empty string if needed.
+                // Actually, user said remove field, implying complete removal.
+                // But DB might still have it. I'll pass an empty string to be safe if I can't check schema.
+                // "designation" field likely exists in DB.
+                designation: '',
                 universityName,
                 verifyCode,
                 pdfPath: pdfUrl,

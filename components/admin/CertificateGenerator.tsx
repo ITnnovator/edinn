@@ -10,14 +10,12 @@ export default function CertificateGenerator() {
     const router = useRouter();
     const [formData, setFormData] = useState({
         studentName: '',
-        designation: '',
         universityName: ''
     });
     const [loading, setLoading] = useState(false);
     const [generatedPdf, setGeneratedPdf] = useState<string | null>(null);
 
     const isFormValid = formData.studentName.trim() !== '' &&
-        formData.designation.trim() !== '' &&
         formData.universityName.trim() !== '';
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +33,6 @@ export default function CertificateGenerator() {
 
         const data = new FormData();
         data.append('studentName', formData.studentName);
-        data.append('designation', formData.designation);
         data.append('universityName', formData.universityName);
 
         const result = await generateCertificateAction(data);
@@ -70,26 +67,14 @@ export default function CertificateGenerator() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-[#2B3674] mb-2">Designation</label>
-                        <input
-                            type="text"
-                            name="designation"
-                            value={formData.designation}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-[#E0E5F2] rounded-xl text-[#1B2559] placeholder-[#A3AED0] focus:border-[#4318FF] focus:ring-1 focus:ring-[#4318FF] outline-none transition font-medium"
-                            placeholder="e.g. D.Pharm"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-bold text-[#2B3674] mb-2">University Name</label>
+                        <label className="block text-sm font-bold text-[#2B3674] mb-2">In recognition of...</label>
                         <input
                             type="text"
                             name="universityName"
                             value={formData.universityName}
                             onChange={handleChange}
                             className="w-full px-4 py-3 border border-[#E0E5F2] rounded-xl text-[#1B2559] placeholder-[#A3AED0] focus:border-[#4318FF] focus:ring-1 focus:ring-[#4318FF] outline-none transition font-medium"
-                            placeholder="University Name"
+                            placeholder="In recognition of..."
                         />
                     </div>
 
@@ -132,7 +117,6 @@ export default function CertificateGenerator() {
 
                 <CertificatePreview
                     studentName={formData.studentName}
-                    designation={formData.designation}
                     universityName={formData.universityName}
                 />
             </div>

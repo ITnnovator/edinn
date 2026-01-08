@@ -64,7 +64,6 @@ export default function CertificateList({ initialCertificates }: CertificateList
                     <thead>
                         <tr>
                             <th className="px-6 py-3 text-left text-xs font-bold text-[#A3AED0] uppercase tracking-wider">Student</th>
-                            <th className="px-6 py-3 text-left text-xs font-bold text-[#A3AED0] uppercase tracking-wider">Designation</th>
                             <th className="px-6 py-3 text-left text-xs font-bold text-[#A3AED0] uppercase tracking-wider">Status</th>
                             <th className="px-6 py-3 text-left text-xs font-bold text-[#A3AED0] uppercase tracking-wider">Date</th>
                             <th className="px-6 py-3 text-right text-xs font-bold text-[#A3AED0] uppercase tracking-wider">Actions</th>
@@ -79,7 +78,6 @@ export default function CertificateList({ initialCertificates }: CertificateList
                             initialCertificates.map((cert) => (
                                 <tr key={cert.id} className="hover:bg-gray-50 transition-colors">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#2B3674]">{cert.studentName}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#2B3674]">{cert.designation}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                                         <span className={`px-2 py-1 inline-flex text-xs leading-5 font-bold rounded-full ${cert.status === 'VALID' ? 'bg-[#05CD99] bg-opacity-10 text-[#ffffff]' : 'bg-[#EE5D50] bg-opacity-10 text-[#ffffff]'}`}>
                                             {cert.status}

@@ -12,13 +12,12 @@ const COLOR_BLACK = rgb(0, 0, 0);
 
 interface CertificateData {
     studentName: string;
-    designation: string;
     universityName: string;
     verifyCode: string;
 }
 
 export async function generateCertificatePDF(data: CertificateData, baseUrl: string): Promise<Uint8Array> {
-    const { studentName, designation, universityName, verifyCode } = data;
+    const { studentName, universityName, verifyCode } = data;
 
     // 1. Load the background image
     const templatePath = path.join(process.cwd(), 'public/webImages/Certificate.jpg');
@@ -37,10 +36,43 @@ export async function generateCertificatePDF(data: CertificateData, baseUrl: str
     });
 
     // 3. Embed Font
-    // Using StandardFonts.Helvetica for reliability, but mimicking "embedded" requirement 
-    // by using a fetch if we wanted a real TTF. For now, StandardFonts is safest to start.
-    // To truly use embedded TTF, we would read a .ttf file and use pdfDoc.embedFont(bytes)
-    // Let's try to find a system font or just use Helvetica and accept it for this iteration.
+    // Register fontkit to support custom fonts
+    const fontkit = require('fontkit');
+    pdfDoc.registerFontkit(fontkit);
+
+    // Load Great Vibes font
+    const fontPath = path.join(process.cwd(), 'public/fonts/GreatVibes-Regular.ttf');
+    console.log('Attempting to load font from:', fontPath);
+
+    if (!fs.existsSync(fontPath)) {
+        console.error('Font file not found at:', fontPath);
+        throw new Error(`Font file not found at ${fontPath}`);
+    }
+
+    const fontBytes = fs.readFileSync(fontPath);
+    console.log('Font bytes read, length:', fontBytes.length);
+
+    let greatVibesFont;
+    try {
+        greatVibesFont = await pdfDoc.embedFont(fontBytes);
+        console.log('Great Vibes font embedded successfully');
+    } catch (e) {
+        console.error('Error embedding font:', e);
+        throw new Error(`Failed to embed Great Vibes font: ${e instanceof Error ? e.message : String(e)}`);
+    }
+
+    // Load Playfair Display SemiBold
+    const playfairPath = path.join(process.cwd(), 'public/fonts/PlayfairDisplay-SemiBold.ttf');
+    let playfairFont;
+    if (fs.existsSync(playfairPath)) {
+        const playfairBytes = fs.readFileSync(playfairPath);
+        playfairFont = await pdfDoc.embedFont(playfairBytes);
+    } else {
+        // Fallback to Helvetica Bold if not found (or throw error if critical)
+        console.warn('Playfair font not found, falling back');
+        playfairFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    }
+
     const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
@@ -56,7 +88,7 @@ export async function generateCertificatePDF(data: CertificateData, baseUrl: str
         }
 
         const x = (CANVAS_WIDTH - textWidth) / 2; // Center alignment
-        // PDF coordinates: origin is bottom-left. 
+        // PDF coordinates: origin is bottom-left.
         // Requirement says: "Origin: top-left (0,0), y for text is baseline Y"
         const pdfY = CANVAS_HEIGHT - yBase;
 
@@ -69,14 +101,25 @@ export async function generateCertificatePDF(data: CertificateData, baseUrl: str
         });
     };
 
-    // 1) Student Name: baselineY: 770. Size: 70. Uppercase. Bold.
-    drawCenteredText(studentName.toUpperCase(), 770, 1400, 70, fontBold);
+    // 1) Student Name: baselineY: 770 -> 765 (Moved up 5px). Size: 105. Font: Great Vibes.
+    drawCenteredText(studentName, 750, 1400, 105, greatVibesFont);
 
-    // 2) Designation: baselineY: 860. Size: 35. Normal (Regular).
-    drawCenteredText(designation, 860, 1000, 35, fontRegular);
+    // 2) Designation REMOVED
 
-    // 3) University Name: baselineY: 930. Size: 35. Normal (Regular).
-    drawCenteredText(universityName, 930, 1300, 35, fontRegular);
+    // 3) University Name: baselineY: 930. Size: 35 -> 53 (approx 50% increase). Font: Playfair Display SemiBold.
+    // If universityName is empty or placeholder, we might want to ensure something prints, but basic string check handles it.
+    // Label change says "In recognition of..." but that's likely the label for the field, or the text itself?
+    // User said: "keep the university field but change its label to In recognition of..."
+    // and "change university font to playfair display... increase its size 50% more".
+    // This implies the CONTENT of the variable `universityName` is printed here.
+    // The placeholder change in preview suggests the user might type "In recognition of..." OR the field concept receives that text.
+    // However, usually "In recognition of..." is static text on a certificate.
+    // If the user wants the INPUT to receive "In recognition of..." they type it.
+    // If the LABEL is "In recognition of...", the user types the university name?
+    // Wait, "In recognition of..." usually precedes the Name.
+    // But here it replaces University Name field label.
+    // Let's stick to printing `universityName` variable content.
+    drawCenteredText(universityName || 'In recognition of...', 930, 1300, 53, playfairFont);
 
     // 5. Generate and Draw QR Code
     // New Requirement: 200x200.
