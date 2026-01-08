@@ -129,7 +129,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                                 justifyContent: 'center',
                             }}
                         >
-                            <img src="/webImages/favicon.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                            <img src="/favicon.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                         </div>
                     </div>
                 </div>

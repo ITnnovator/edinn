@@ -147,7 +147,7 @@ export async function generateCertificatePDF(data: CertificateData, baseUrl: str
 
     // 6. Draw Favicon in Center of QR Code
     // Load favicon
-    const faviconPath = path.join(process.cwd(), 'public/webImages/favicon.png');
+    const faviconPath = path.join(process.cwd(), 'public/favicon.png');
     if (fs.existsSync(faviconPath)) {
         const faviconBytes = fs.readFileSync(faviconPath);
         const faviconImage = await pdfDoc.embedPng(faviconBytes);

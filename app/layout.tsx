@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Engineers & Doctors School in Karachi offers quality education with strong academics, admissions guidance, and a supportive learning environment.',
   keywords: 'Engineers & Doctors School, ED School Karachi, school in Karachi, admissions, academics, education',
   icons: {
-    icon: '/webImages/favicon.png',
+    icon: '/favicon.png',
   },
 };
 
@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 
 
-        <link rel="icon" href="/webImages/favicon.png" />
+        <link rel="icon" href="/favicon.png" />
       </head>
       <body suppressHydrationWarning={true}>
         <Providers>
