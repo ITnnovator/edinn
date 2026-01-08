@@ -101,9 +101,6 @@ export default function Header() {
                 <Link href="/about" title="About Us" className={isActive("/about")} onClick={closeMenu}>
                   About Us
                 </Link>
-                <ul>
-                  {/* Team link removed as requested */}
-                </ul>
               </li>
               <li>
                 <Link href="/academics" title="academics" className={isActive("/academics")} onClick={closeMenu}>

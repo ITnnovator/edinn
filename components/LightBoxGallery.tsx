@@ -26,11 +26,11 @@ declare global {
     }
 }
 
-export default function LightBoxGallery({ 
-    images, 
-    className, 
+export default function LightBoxGallery({
+    images,
+    className,
     enableMasonry = false,
-    layout 
+    layout
 }: LightBoxGalleryProps) {
     const [open, setOpen] = useState(false);
     const [index, setIndex] = useState(0);
@@ -40,60 +40,63 @@ export default function LightBoxGallery({
     // If layout is explicit, use it.
     // If layout is undefined, default to 'masonry' because that is the legacy behavior expected by the Home page.
     // (enableMasonry prop is kept for backward compatibility if it's ever explicitly passed as true/false, but we lean towards masonry default).
-    
+
     // Logic: 
     // 1. layout prop takes precedence.
     // 2. if enableMasonry is explicitly true, use masonry.
     // 3. functional default is masonry.
-    
+
     const effectiveLayout = layout || (enableMasonry ? 'masonry' : 'masonry');
 
     useEffect(() => {
-        if (effectiveLayout !== 'masonry') return;
-
-        let intervalId: NodeJS.Timeout;
-        let attempts = 0;
-        const maxAttempts = 20; // 4 seconds total polling
-
-        const initMasonry = () => {
-            if (typeof window !== "undefined" && window.jQuery && window.jQuery.fn.isotope && window.jQuery.fn.imagesLoaded) {
+        // Function to check and initialize Isotope
+        const checkAndInit = () => {
+            if (typeof window !== "undefined" && window.jQuery && window.jQuery.fn.isotope) {
                 const $ = window.jQuery;
                 const $container = $(containerRef.current);
 
-                if ($container.length > 0) {
-                    $container.imagesLoaded(() => {
+                if ($container.length > 0 && !$container.hasClass('isotope-initialized')) {
+                    const initIsotope = () => {
                         $container.isotope({
-                            itemSelector: 'li',
-                            masonry: {
-                                columnWidth: 'li' // Use li as column width reference
-                            }
+                            itemSelector: 'li', // Assuming list items are the grid elements, adjust if needed based on usage
+                            masonry: { columnWidth: 0.5 }
                         });
-                        // Forced layout after a small delay to catch any missed updates
-                        setTimeout(() => {
-                            $container.isotope('layout');
-                        }, 500);
-                    });
-                    
-                    clearInterval(intervalId);
-                    return true;
+                        $container.addClass('isotope-initialized');
+                    };
+
+                    if ($container.imagesLoaded) {
+                        $container.imagesLoaded(initIsotope);
+                    } else {
+                        // Fallback if imagesLoaded is not available or taking time
+                        setTimeout(initIsotope, 500);
+                    }
+                    return true; // Initialized successfully
                 }
             }
-            return false;
+            return false; // Not yet initialized
         };
 
-        // Try immediately
-        if (!initMasonry()) {
-            intervalId = setInterval(() => {
-                attempts++;
-                if (initMasonry() || attempts >= maxAttempts) {
+        if (effectiveLayout === 'masonry') {
+            // Check immediately
+            if (checkAndInit()) return;
+
+            // Poll for scripts
+            const intervalId = setInterval(() => {
+                if (checkAndInit()) {
                     clearInterval(intervalId);
                 }
             }, 200);
-        }
 
-        return () => {
-            if (intervalId) clearInterval(intervalId);
-        };
+            // Stop polling after 5 seconds to prevent infinite checking
+            const timeoutId = setTimeout(() => {
+                clearInterval(intervalId);
+            }, 5000);
+
+            return () => {
+                clearInterval(intervalId);
+                clearTimeout(timeoutId);
+            };
+        }
     }, [images, effectiveLayout]);
 
     const handleClick = (i: number, e: React.MouseEvent) => {
@@ -104,7 +107,7 @@ export default function LightBoxGallery({
 
     if (effectiveLayout === 'insta') {
         return (
-             <>
+            <>
                 <div className="insta-flex" ref={containerRef as React.RefObject<HTMLDivElement>}>
                     {images.map((img, i) => (
                         <div key={i} className="insta-item">
@@ -115,13 +118,13 @@ export default function LightBoxGallery({
                                 title={img.title || ""}
                             >
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <Image 
-                                    src={img.src} 
+                                <Image
+                                    src={img.src}
                                     alt={img.alt}
-                                    width={0} 
-                                    height={0} 
+                                    width={0}
+                                    height={0}
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    style={{ width: '100%'}}
+                                    style={{ width: '100%' }}
                                 />
                             </a>
                         </div>
@@ -144,20 +147,6 @@ export default function LightBoxGallery({
 
     return (
         <>
-            <style jsx>{`
-                .masonary {
-                    display: flex;
-                    flex-wrap: wrap;
-                    list-style: none;
-                    padding: 0;
-                    margin: 0;
-                    width: 100%;
-                }
-                /* Once isotope-layout is active, it will use position absolute */
-                .masonary.isotope {
-                    display: block;
-                }
-            `}</style>
             <ul className={containerClass} ref={containerRef as React.RefObject<HTMLUListElement>}>
                 {images.map((img, i) => (
                     <li key={i} className={img.className || `width${(i % 10) + 1} wow zoomIn`} data-wow-duration="1000ms">
@@ -167,11 +156,11 @@ export default function LightBoxGallery({
                             className="html5lightbox"
                             title={img.title || ""}
                         >
-                            <Image 
-                                src={img.src} 
-                                alt={img.alt} 
-                                width={0} 
-                                height={0} 
+                            <Image
+                                src={img.src}
+                                alt={img.alt}
+                                width={0}
+                                height={0}
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 style={{ width: '100%' }}
                             />

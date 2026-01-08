@@ -106,7 +106,7 @@ export default function Footer() {
           <div className="bottom-footer">
             <div className="row align-items-center">
               <div className="col-lg-6 col-md-12 ">
-                <p>© Copyrights 2025 Engineers & Doctors School. All rights
+                <p>© Copyrights {new Date().getFullYear()} Engineers & Doctors School. All rights
                   reserved.</p>
               </div>
               <div className="col-lg-6 col-md-12">

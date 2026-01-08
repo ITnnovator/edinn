@@ -12999,7 +12999,7 @@ a.text-dark:hover {
   background: #fff;
 }
 
-@font-face {
+/* @font-face {
   font-family: slick;
   font-weight: 400;
   font-style: normal;
@@ -13008,7 +13008,7 @@ a.text-dark:hover {
     url(../../index.html) format("woff"),
     url(../../index.html) format("truetype"),
     url(../../index.html#slick) format("svg");
-}
+} */
 
 .slick-next,
 .slick-prev {
@@ -19498,7 +19498,7 @@ a {
   z-index: -1;
 }
 
-.bg1 {
+/* .bg1 {
   background-image: url(../../index.html);
 }
 
@@ -19512,7 +19512,7 @@ a {
 
 .bg4 {
   background-image: url(../../index.html);
-}
+} */
 
 a {
   transition: all 0.4s ease-in-out;
@@ -20133,12 +20133,13 @@ a.crt-btn i {
   position: absolute;
   bottom: -20px;
   right: 20px;
+  min-height: 40px;
   width: 40px;
   background: linear-gradient(180deg, #01ffff, #63f101);
   z-index: 99;
   text-align: center;
   border-radius: 30px;
-  padding: 8px 0 11px;
+  padding: 8px 0;
 }
 
 .teachers-section .teachers .teacher .teacher-img .sc-div:hover ul {
