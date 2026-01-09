@@ -143,7 +143,8 @@ export async function deleteCertificateAction(verifyCode: string) {
 
         // 2. Delete file
         if (cert.pdfPath) {
-            await storage.delete(cert.pdfPath);
+            // Folder name must match what you used in storage.upload for certificates
+            await storage.delete('certificates', cert.pdfPath);
         }
 
         // 3. Delete from database
