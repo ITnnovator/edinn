@@ -7,6 +7,9 @@ import { createTeacher, updateTeacher } from "@/app/actions/teacher";
 import { useRouter } from "next/navigation";
 import toast from 'react-hot-toast';
 import RichTextEditor from '@/components/RichTextEditor';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format, parse } from "date-fns";
 
 // Types matching the Prisma model loosely
 type TeacherFormData = {
@@ -189,10 +192,26 @@ export function TeacherForm({ teacher }: { teacher?: any }) {
 
             <div className="group">
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5 ml-1">Date of Birth</label>
-              <input
-                {...register("dob")}
-                className="w-full !h-12 !px-4 border border-slate-200 rounded-xl bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all duration-200 outline-none placeholder:text-slate-400 font-semibold text-slate-700"
-                placeholder="e.g. 15 Aug 1985"
+              <Controller
+                control={control}
+                name="dob"
+                render={({ field }) => (
+                  <div className="date-picker-wrapper w-full relative">
+                    <DatePicker
+                      selected={field.value ? parse(field.value, "d MMM yyyy", new Date()) : null}
+                      onChange={(date) => field.onChange(date ? format(date, "d MMM yyyy") : "")}
+                      dateFormat="d MMM yyyy"
+                      placeholderText="Select date of birth"
+                      className="w-full !h-12 !px-4 border border-slate-200 rounded-xl bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all duration-200 outline-none placeholder:text-slate-400 font-semibold text-slate-700"
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                    />
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                      <i className="fas fa-calendar-alt"></i>
+                    </div>
+                  </div>
+                )}
               />
             </div>
 
@@ -417,6 +436,40 @@ export function TeacherForm({ teacher }: { teacher?: any }) {
           </button>
         </div>
       </div>
+      <style jsx global>{`
+        .date-picker-wrapper .react-datepicker-wrapper {
+          width: 100%;
+        }
+        .react-datepicker {
+          font-family: inherit;
+          border-radius: 16px;
+          border: 1px solid #E0E5F2;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          overflow: hidden;
+        }
+        .react-datepicker__header {
+          background: linear-gradient(135deg, #868CFF 0%, #4318FF 100%);
+          border-bottom: none;
+          padding-top: 15px;
+        }
+        .react-datepicker__current-month, 
+        .react-datepicker__day-name, 
+        .react-datepicker-time__header {
+          color: white !important;
+        }
+        .react-datepicker__day--selected, 
+        .react-datepicker__day--keyboard-selected {
+          background-color: #4318FF !important;
+          border-radius: 8px;
+        }
+        .react-datepicker__day:hover {
+          border-radius: 8px;
+          background-color: #F4F7FE;
+        }
+        .react-datepicker__navigation-icon::before {
+          border-color: white;
+        }
+      `}</style>
     </form>
   );
 }
